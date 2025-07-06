@@ -63,6 +63,9 @@ class GEEDataRetriever:
         Initialize Google Earth Engine authentication and API.
         """
         try:
+            # Get project ID from config
+            project_id = self.config.get('gee', {}).get('project_id')
+            
             if (self.service_account_path and 
                 isinstance(self.service_account_path, str) and 
                 os.path.exists(self.service_account_path)):
@@ -70,18 +73,18 @@ class GEEDataRetriever:
                 credentials = ee.ServiceAccountCredentials(
                     None, self.service_account_path
                 )
-                ee.Initialize(credentials)
-                print("✅ GEE initialized with service account")
+                ee.Initialize(credentials, project=project_id)
+                print(f"✅ GEE initialized with service account (Project: {project_id})")
             else:
                 # OAuth authentication (for development)
                 try:
-                    ee.Initialize()
-                    print("✅ GEE initialized with existing credentials")
+                    ee.Initialize(project=project_id)
+                    print(f"✅ GEE initialized with existing credentials (Project: {project_id})")
                 except:
                     print("🔐 First time setup - please authenticate...")
                     ee.Authenticate()  # This will open browser for first-time setup
-                    ee.Initialize()
-                    print("✅ GEE initialized with OAuth")
+                    ee.Initialize(project=project_id)
+                    print(f"✅ GEE initialized with OAuth (Project: {project_id})")
         except Exception as e:
             print(f"❌ GEE initialization failed: {e}")
             print("Please run: earthengine authenticate")

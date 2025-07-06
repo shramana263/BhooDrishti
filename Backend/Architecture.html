@@ -1,0 +1,233 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">
+    Satellite Data Processing Architecture
+  </text>
+  
+  <!-- Data Sources Layer -->
+  <g id="data-sources">
+    <rect x="50" y="70" width="280" height="120" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="190" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#0284c7">
+      Satellite Data Sources
+    </text>
+    
+    <!-- Data source boxes -->
+    <rect x="70" y="105" width="110" height="35" rx="5" fill="#0284c7" stroke="#0284c7"/>
+    <text x="125" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Bhoonidhi NRSC</text>
+    
+    <rect x="200" y="105" width="110" height="35" rx="5" fill="#0284c7" stroke="#0284c7"/>
+    <text x="255" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Google Earth Engine</text>
+    
+    <rect x="70" y="145" width="110" height="35" rx="5" fill="#0284c7" stroke="#0284c7"/>
+    <text x="125" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Sentinel 2</text>
+    
+    <rect x="200" y="145" width="110" height="35" rx="5" fill="#0284c7" stroke="#0284c7"/>
+    <text x="255" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Landsat 8/9</text>
+  </g>
+  
+  <!-- Data Ingestion Layer -->
+  <g id="data-ingestion">
+    <rect x="380" y="70" width="200" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="480" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#16a34a">
+      Data Ingestion
+    </text>
+    
+    <rect x="400" y="105" width="160" height="35" rx="5" fill="#16a34a" stroke="#16a34a"/>
+    <text x="480" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">GEE Data Retriever</text>
+    
+    <rect x="400" y="145" width="160" height="35" rx="5" fill="#16a34a" stroke="#16a34a"/>
+    <text x="480" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Satellite Preprocessor</text>
+  </g>
+  
+  <!-- Processing Engine -->
+  <g id="processing-engine">
+    <rect x="630" y="70" width="250" height="120" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="755" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#d97706">
+      Processing Engine
+    </text>
+    
+    <rect x="650" y="105" width="100" height="35" rx="5" fill="#d97706" stroke="#d97706"/>
+    <text x="700" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Change Detection</text>
+    
+    <rect x="760" y="105" width="100" height="35" rx="5" fill="#d97706" stroke="#d97706"/>
+    <text x="810" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Change Analysis</text>
+    
+    <rect x="705" y="145" width="100" height="35" rx="5" fill="#d97706" stroke="#d97706"/>
+    <text x="755" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Quality Control</text>
+  </g>
+  
+  <!-- Web Interface Layer -->
+  <g id="web-interface">
+    <rect x="50" y="240" width="280" height="120" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="190" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#7c3aed">
+      Web Interface
+    </text>
+    
+    <rect x="70" y="275" width="80" height="35" rx="5" fill="#7c3aed" stroke="#7c3aed"/>
+    <text x="110" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Vue Frontend</text>
+    
+    <rect x="160" y="275" width="80" height="35" rx="5" fill="#7c3aed" stroke="#7c3aed"/>
+    <text x="200" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">AOI Manager</text>
+    
+    <rect x="250" y="275" width="80" height="35" rx="5" fill="#7c3aed" stroke="#7c3aed"/>
+    <text x="290" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">OpenLayers</text>
+    
+    <rect x="115" y="315" width="110" height="35" rx="5" fill="#7c3aed" stroke="#7c3aed"/>
+    <text x="170" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Maps Visualization</text>
+  </g>
+  
+  <!-- Backend Services -->
+  <g id="backend-services">
+    <rect x="380" y="240" width="350" height="120" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="555" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#dc2626">
+      Backend Services
+    </text>
+    
+    <rect x="400" y="275" width="90" height="35" rx="5" fill="#dc2626" stroke="#dc2626"/>
+    <text x="445" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">API Gateway</text>
+    
+    <rect x="500" y="275" width="90" height="35" rx="5" fill="#dc2626" stroke="#dc2626"/>
+    <text x="545" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Detection Pipeline</text>
+    
+    <rect x="600" y="275" width="90" height="35" rx="5" fill="#dc2626" stroke="#dc2626"/>
+    <text x="645" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Alert Service</text>
+    
+    <rect x="510" y="315" width="120" height="35" rx="5" fill="#dc2626" stroke="#dc2626"/>
+    <text x="570" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Change Det. Pipeline</text>
+  </g>
+  
+  <!-- Storage Layer -->
+  <g id="storage-layer">
+    <rect x="50" y="410" width="280" height="120" rx="10" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+    <text x="190" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9333ea">
+      Storage Layer
+    </text>
+    
+    <rect x="70" y="445" width="100" height="35" rx="5" fill="#9333ea" stroke="#9333ea"/>
+    <text x="120" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">PostgreSQL PostGIS</text>
+    
+    <rect x="180" y="445" width="100" height="35" rx="5" fill="#9333ea" stroke="#9333ea"/>
+    <text x="230" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">File Storage</text>
+    
+    <rect x="125" y="485" width="100" height="35" rx="5" fill="#9333ea" stroke="#9333ea"/>
+    <text x="175" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Redis Cache</text>
+  </g>
+  
+  <!-- Output Services -->
+  <g id="output-services">
+    <rect x="380" y="410" width="350" height="120" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="555" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#059669">
+      Output Services
+    </text>
+    
+    <rect x="400" y="445" width="90" height="35" rx="5" fill="#059669" stroke="#059669"/>
+    <text x="445" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">GIS Export</text>
+    
+    <rect x="500" y="445" width="90" height="35" rx="5" fill="#059669" stroke="#059669"/>
+    <text x="545" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Report Generator</text>
+    
+    <rect x="600" y="445" width="90" height="35" rx="5" fill="#059669" stroke="#059669"/>
+    <text x="645" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Notification</text>
+    
+    <rect x="510" y="485" width="120" height="35" rx="5" fill="#059669" stroke="#059669"/>
+    <text x="570" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Service Layer</text>
+  </g>
+  
+  <!-- External Services -->
+  <g id="external-services">
+    <rect x="770" y="410" width="200" height="120" rx="10" fill="#fef7ff" stroke="#a21caf" stroke-width="2"/>
+    <text x="870" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#a21caf">
+      External Services
+    </text>
+    
+    <rect x="790" y="445" width="80" height="35" rx="5" fill="#a21caf" stroke="#a21caf"/>
+    <text x="830" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Email Service</text>
+    
+    <rect x="880" y="445" width="80" height="35" rx="5" fill="#a21caf" stroke="#a21caf"/>
+    <text x="920" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">SMS Gateway</text>
+    
+    <rect x="835" y="485" width="80" height="35" rx="5" fill="#a21caf" stroke="#a21caf"/>
+    <text x="875" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Webhook</text>
+  </g>
+  
+  <!-- Connection Arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  
+  <!-- Data Sources to Ingestion -->
+  <line x1="330" y1="130" x2="380" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Ingestion to Processing -->
+  <line x1="580" y1="130" x2="630" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Processing to Backend -->
+  <line x1="755" y1="190" x2="755" y2="220" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="755" y1="220" x2="520" y2="220" stroke="#64748b" stroke-width="2"/>
+  <line x1="520" y1="220" x2="520" y2="240" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Web Interface to Backend -->
+  <line x1="330" y1="300" x2="380" y2="300" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Backend to Storage -->
+  <line x1="520" y1="360" x2="520" y2="380" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="520" y1="380" x2="190" y2="380" stroke="#64748b" stroke-width="2"/>
+  <line x1="190" y1="380" x2="190" y2="410" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Backend to Output -->
+  <line x1="520" y1="360" x2="520" y2="410" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Output to External -->
+  <line x1="730" y1="470" x2="770" y2="470" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Data Flow Labels -->
+  <text x="355" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Data Flow</text>
+  <text x="605" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Processing</text>
+  <text x="355" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">API Calls</text>
+  <text x="750" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Notifications</text>
+  
+  <!-- Legend -->
+  <g id="legend">
+    <rect x="950" y="70" width="280" height="140" rx="5" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="1090" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1e293b">
+      Legend
+    </text>
+    
+    <rect x="970" y="105" width="15" height="15" fill="#0284c7"/>
+    <text x="995" y="117" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Data Sources</text>
+    
+    <rect x="970" y="125" width="15" height="15" fill="#16a34a"/>
+    <text x="995" y="137" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Data Ingestion</text>
+    
+    <rect x="970" y="145" width="15" height="15" fill="#d97706"/>
+    <text x="995" y="157" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Processing</text>
+    
+    <rect x="970" y="165" width="15" height="15" fill="#7c3aed"/>
+    <text x="995" y="177" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Web Interface</text>
+    
+    <rect x="970" y="185" width="15" height="15" fill="#dc2626"/>
+    <text x="995" y="197" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Backend Services</text>
+    
+    <rect x="1130" y="105" width="15" height="15" fill="#9333ea"/>
+    <text x="1155" y="117" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Storage</text>
+    
+    <rect x="1130" y="125" width="15" height="15" fill="#059669"/>
+    <text x="1155" y="137" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Output Services</text>
+    
+    <rect x="1130" y="145" width="15" height="15" fill="#a21caf"/>
+    <text x="1155" y="157" font-family="Arial, sans-serif" font-size="10" fill="#64748b">External Services</text>
+    
+    <line x1="1130" y1="175" x2="1160" y2="175" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="1170" y="179" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Data Flow</text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="600" y="780" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#64748b">
+    Satellite Data Processing System - Architecture Overview
+  </text>
+</svg>

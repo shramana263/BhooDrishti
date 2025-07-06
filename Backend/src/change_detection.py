@@ -105,26 +105,44 @@ class ChangeDetectionEngine:
             afforestation = ndvi_diff.gt(self.ndvi_threshold).rename('afforestation')
             
             # Calculate change statistics
-            stats = {
-                'deforestation_area': deforestation.multiply(ee.Image.pixelArea()).reduceRegion(
-                    reducer=ee.Reducer.sum(),
-                    geometry=aoi,
-                    scale=10,
-                    maxPixels=1e9
-                ),
-                'afforestation_area': afforestation.multiply(ee.Image.pixelArea()).reduceRegion(
-                    reducer=ee.Reducer.sum(),
-                    geometry=aoi,
-                    scale=10,
-                    maxPixels=1e9
-                ),
-                'mean_ndvi_change': ndvi_diff.reduceRegion(
-                    reducer=ee.Reducer.mean(),
-                    geometry=aoi,
-                    scale=10,
-                    maxPixels=1e9
-                )
-            }
+            deforestation_area_calc = deforestation.multiply(ee.Image.pixelArea()).reduceRegion(
+                reducer=ee.Reducer.sum(),
+                geometry=aoi,
+                scale=10,
+                maxPixels=1e9
+            )
+            
+            afforestation_area_calc = afforestation.multiply(ee.Image.pixelArea()).reduceRegion(
+                reducer=ee.Reducer.sum(),
+                geometry=aoi,
+                scale=10,
+                maxPixels=1e9
+            )
+            
+            mean_ndvi_change_calc = ndvi_diff.reduceRegion(
+                reducer=ee.Reducer.mean(),
+                geometry=aoi,
+                scale=10,
+                maxPixels=1e9
+            )
+            
+            # Convert EE objects to Python objects
+            try:
+                stats = {
+                    'deforestation_area': deforestation_area_calc.getInfo(),
+                    'afforestation_area': afforestation_area_calc.getInfo(),
+                    'mean_ndvi_change': mean_ndvi_change_calc.getInfo()
+                }
+                print(f"📊 Statistics computed successfully")
+            except Exception as stats_error:
+                print(f"⚠️ Error computing statistics: {stats_error}")
+                # Fallback: return EE objects for later processing
+                stats = {
+                    'deforestation_area': deforestation_area_calc,
+                    'afforestation_area': afforestation_area_calc,
+                    'mean_ndvi_change': mean_ndvi_change_calc,
+                    'note': 'Statistics as EE objects - call .getInfo() to convert'
+                }
             
             return {
                 'change_image': ndvi_diff,

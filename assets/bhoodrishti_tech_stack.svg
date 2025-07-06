@@ -1,0 +1,276 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="frontendGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="100%" style="stop-color:#0284c7"/>
+    </linearGradient>
+    <linearGradient id="backendGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="databaseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <linearGradient id="processingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899"/>
+      <stop offset="100%" style="stop-color:#db2777"/>
+    </linearGradient>
+    
+    <!-- Drop shadow filter -->
+    <filter id="dropshadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+    
+    <!-- Arrow marker definition -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569"/>
+    </marker>
+  </defs>
+  
+  <rect width="1280" height="720" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="640" y="50" text-anchor="middle" fill="#1e293b" font-family="Arial, sans-serif" font-size="36" font-weight="bold">
+    BhooDrishti Technology Stack
+  </text>
+  <text x="640" y="80" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="18">
+    Change Detection System Architecture
+  </text>
+  
+  <!-- Frontend Layer -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="280" height="180" rx="12" fill="url(#frontendGradient)" filter="url(#dropshadow)" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="140" y="25" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Frontend</text>
+    
+    <!-- Next.js Icon -->
+    <circle cx="70" cy="60" r="20" fill="#000000"/>
+    <text x="70" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">N</text>
+    <text x="70" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Next.js 14+</text>
+    
+    <!-- React Icon -->
+    <circle cx="210" cy="60" r="20" fill="#61dafb"/>
+    <text x="210" y="67" text-anchor="middle" fill="#000000" font-family="Arial, sans-serif" font-size="12" font-weight="bold">R</text>
+    <text x="210" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">React 18+</text>
+    
+    <!-- OpenLayers -->
+    <circle cx="70" cy="130" r="20" fill="#1f77b4"/>
+    <text x="70" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">OL</text>
+    <text x="70" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">OpenLayers</text>
+    
+    <!-- Tailwind CSS -->
+    <circle cx="210" cy="130" r="20" fill="#06b6d4"/>
+    <text x="210" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">TW</text>
+    <text x="210" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Tailwind</text>
+  </g>
+  
+  <!-- Backend Layer -->
+  <g transform="translate(380, 120)">
+    <rect x="0" y="0" width="280" height="180" rx="12" fill="url(#backendGradient)" filter="url(#dropshadow)" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="140" y="25" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Backend</text>
+    
+    <!-- Node.js Icon -->
+    <circle cx="70" cy="60" r="20" fill="#339933"/>
+    <text x="70" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">N</text>
+    <text x="70" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Node.js</text>
+    
+    <!-- Express.js -->
+    <circle cx="210" cy="60" r="20" fill="#2c3e50"/>
+    <text x="210" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">E</text>
+    <text x="210" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Express.js</text>
+    
+    <!-- Socket.io -->
+    <circle cx="70" cy="130" r="20" fill="#25292e"/>
+    <text x="70" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">IO</text>
+    <text x="70" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Socket.io</text>
+    
+    <!-- JWT -->
+    <circle cx="210" cy="130" r="20" fill="#d63aff"/>
+    <text x="210" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">JWT</text>
+    <text x="210" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Auth</text>
+  </g>
+  
+  <!-- Processing Layer -->
+  <g transform="translate(710, 120)">
+    <rect x="0" y="0" width="280" height="180" rx="12" fill="url(#processingGradient)" filter="url(#dropshadow)" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="140" y="25" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Processing Engine</text>
+    
+    <!-- Python Icon -->
+    <circle cx="70" cy="60" r="20" fill="#3776ab"/>
+    <text x="70" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Py</text>
+    <text x="70" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Python 3.9+</text>
+    
+    <!-- Google Earth Engine -->
+    <circle cx="210" cy="60" r="20" fill="#4285f4"/>
+    <text x="210" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">GEE</text>
+    <text x="210" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Earth Engine</text>
+    
+    <!-- Machine Learning -->
+    <circle cx="70" cy="130" r="20" fill="#ff6f00"/>
+    <text x="70" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ML</text>
+    <text x="70" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Scikit-learn</text>
+    
+    <!-- OpenCV -->
+    <circle cx="210" cy="130" r="20" fill="#5c3ee8"/>
+    <text x="210" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">CV</text>
+    <text x="210" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">OpenCV</text>
+  </g>
+  
+  <!-- Database Layer -->
+  <g transform="translate(50, 340)">
+    <rect x="0" y="0" width="280" height="180" rx="12" fill="url(#databaseGradient)" filter="url(#dropshadow)" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="140" y="25" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Database and Storage</text>
+    
+    <!-- PostgreSQL -->
+    <circle cx="70" cy="60" r="20" fill="#336791"/>
+    <text x="70" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">PG</text>
+    <text x="70" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">PostgreSQL</text>
+    
+    <!-- PostGIS -->
+    <circle cx="210" cy="60" r="20" fill="#2e7d32"/>
+    <text x="210" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">GIS</text>
+    <text x="210" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">PostGIS</text>
+    
+    <!-- Redis -->
+    <circle cx="70" cy="130" r="20" fill="#dc382d"/>
+    <text x="70" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">R</text>
+    <text x="70" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Redis</text>
+    
+    <!-- AWS S3 -->
+    <circle cx="210" cy="130" r="20" fill="#ff9900"/>
+    <text x="210" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">S3</text>
+    <text x="210" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">AWS S3</text>
+  </g>
+  
+  <!-- Satellite Data Sources -->
+  <g transform="translate(380, 340)">
+    <rect x="0" y="0" width="280" height="180" rx="12" fill="url(#cardGradient)" filter="url(#dropshadow)" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="140" y="25" text-anchor="middle" fill="#1e293b" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Satellite Data</text>
+    
+    <!-- Sentinel-2 -->
+    <circle cx="70" cy="60" r="20" fill="#1565c0"/>
+    <text x="70" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">S2</text>
+    <text x="70" y="95" text-anchor="middle" fill="#1e293b" font-family="Arial, sans-serif" font-size="12">Sentinel-2</text>
+    
+    <!-- Landsat -->
+    <circle cx="210" cy="60" r="20" fill="#388e3c"/>
+    <text x="210" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">L8</text>
+    <text x="210" y="95" text-anchor="middle" fill="#1e293b" font-family="Arial, sans-serif" font-size="12">Landsat 8/9</text>
+    
+    <!-- Planet Labs -->
+    <circle cx="70" cy="130" r="20" fill="#0091ea"/>
+    <text x="70" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">PL</text>
+    <text x="70" y="165" text-anchor="middle" fill="#1e293b" font-family="Arial, sans-serif" font-size="12">Planet Labs</text>
+    
+    <!-- Bhoonidhi -->
+    <circle cx="210" cy="130" r="20" fill="#ff5722"/>
+    <text x="210" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">BH</text>
+    <text x="210" y="165" text-anchor="middle" fill="#1e293b" font-family="Arial, sans-serif" font-size="12">Bhoonidhi</text>
+  </g>
+  
+  <!-- Cloud & DevOps -->
+  <g transform="translate(710, 340)">
+    <rect x="0" y="0" width="280" height="180" rx="12" fill="url(#cloudGradient)" filter="url(#dropshadow)" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="140" y="25" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Cloud and DevOps</text>
+    
+    <!-- Docker -->
+    <circle cx="70" cy="60" r="20" fill="#2496ed"/>
+    <text x="70" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">D</text>
+    <text x="70" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Docker</text>
+    
+    <!-- AWS -->
+    <circle cx="210" cy="60" r="20" fill="#ff9900"/>
+    <text x="210" y="67" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">AWS</text>
+    <text x="210" y="95" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">AWS/GCP</text>
+    
+    <!-- Kubernetes -->
+    <circle cx="70" cy="130" r="20" fill="#326ce5"/>
+    <text x="70" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">K8</text>
+    <text x="70" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Kubernetes</text>
+    
+    <!-- GitHub Actions -->
+    <circle cx="210" cy="130" r="20" fill="#24292e"/>
+    <text x="210" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">GH</text>
+    <text x="210" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">CI/CD</text>
+  </g>
+  
+  <!-- Data Flow Arrows -->
+  <g stroke="#475569" stroke-width="2" fill="none" opacity="0.7">
+    <!-- Frontend to Backend -->
+    <path d="M 330 210 Q 350 210 370 210" marker-end="url(#arrowhead)"/>
+    <!-- Backend to Processing -->
+    <path d="M 660 210 Q 680 210 700 210" marker-end="url(#arrowhead)"/>
+    <!-- Processing to Database -->
+    <path d="M 850 300 Q 850 320 320 320 Q 300 320 300 340" marker-end="url(#arrowhead)"/>
+    <!-- Satellite Data to Processing -->
+    <path d="M 520 340 Q 520 320 850 320 Q 850 300 850 280" marker-end="url(#arrowhead)"/>
+    <!-- Database to Backend -->
+    <path d="M 190 340 Q 190 320 520 320 Q 520 280 520 260" marker-end="url(#arrowhead)"/>
+    <!-- Cloud supporting all -->
+    <path d="M 850 340 Q 850 320 640 320 Q 640 300 640 280" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  </g>
+  
+  <!-- Architecture Flow Description -->
+  <g transform="translate(50, 560)">
+    <rect x="0" y="0" width="1180" height="120" rx="12" fill="#ffffff" stroke="#d1d5db" stroke-width="1" filter="url(#dropshadow)"/>
+    <text x="20" y="30" fill="#1e293b" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Architecture Flow:</text>
+    <text x="20" y="55" fill="#475569" font-family="Arial, sans-serif" font-size="14">
+      1. Frontend (Next.js + OpenLayers) → User interaction and AOI selection
+    </text>
+    <text x="20" y="75" fill="#475569" font-family="Arial, sans-serif" font-size="14">
+      2. Backend (Node.js + Express) → API management and real-time communication
+    </text>
+    <text x="20" y="95" fill="#475569" font-family="Arial, sans-serif" font-size="14">
+      3. Processing Engine (Python + GEE) → Satellite data analysis and change detection
+    </text>
+    <text x="600" y="55" fill="#475569" font-family="Arial, sans-serif" font-size="14">
+      4. Database (PostgreSQL + PostGIS) → Spatial data storage and management
+    </text>
+    <text x="600" y="75" fill="#475569" font-family="Arial, sans-serif" font-size="14">
+      5. Cloud Infrastructure (AWS/GCP + Docker) → Scalable deployment and storage
+    </text>
+    <text x="600" y="95" fill="#475569" font-family="Arial, sans-serif" font-size="14">
+      6. Satellite Data Integration → Real-time earth observation data processing
+    </text>
+  </g>
+  
+  <!-- System Features -->
+  <g transform="translate(1020, 120)">
+    <rect x="0" y="0" width="210" height="200" rx="12" fill="#ffffff" stroke="#d1d5db" stroke-width="1" filter="url(#dropshadow)"/>
+    <text x="105" y="25" text-anchor="middle" fill="#1e293b" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Key Features</text>
+    
+    <circle cx="25" cy="50" r="4" fill="#10b981"/>
+    <text x="35" y="55" fill="#475569" font-family="Arial, sans-serif" font-size="12">Real-time Processing</text>
+    
+    <circle cx="25" cy="70" r="4" fill="#0ea5e9"/>
+    <text x="35" y="75" fill="#475569" font-family="Arial, sans-serif" font-size="12">Interactive Mapping</text>
+    
+    <circle cx="25" cy="90" r="4" fill="#f59e0b"/>
+    <text x="35" y="95" fill="#475569" font-family="Arial, sans-serif" font-size="12">Spatial Analytics</text>
+    
+    <circle cx="25" cy="110" r="4" fill="#8b5cf6"/>
+    <text x="35" y="115" fill="#475569" font-family="Arial, sans-serif" font-size="12">ML Classification</text>
+    
+    <circle cx="25" cy="130" r="4" fill="#ec4899"/>
+    <text x="35" y="135" fill="#475569" font-family="Arial, sans-serif" font-size="12">Cloud Scalability</text>
+    
+    <circle cx="25" cy="150" r="4" fill="#06b6d4"/>
+    <text x="35" y="155" fill="#475569" font-family="Arial, sans-serif" font-size="12">Multi-satellite Support</text>
+    
+    <circle cx="25" cy="170" r="4" fill="#84cc16"/>
+    <text x="35" y="175" fill="#475569" font-family="Arial, sans-serif" font-size="12">Change Detection</text>
+  </g>
+</svg>

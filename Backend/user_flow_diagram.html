@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BhooDrishti User Flow Diagram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .diagram-container {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        .flow-step {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .flow-step:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .tooltip {
+            position: absolute;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BhooDrishti Change Detection System</h1>
+            <h2>Complete User Flow Diagram</h2>
+            <p>Interactive diagram showing the user journey from registration to receiving change alerts</p>
+        </div>
+        
+        <div class="diagram-container">
+            <svg viewBox="0 0 1600 1200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+                <!-- Background -->
+                <rect width="1600" height="1200" fill="#ffffff"/>
+                
+                <!-- Define gradients and patterns -->
+                <defs>
+                    <linearGradient id="userGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="systemGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#11998e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#38ef7d;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="alertGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#fecfef;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1" />
+                    </linearGradient>
+                    
+                    <!-- Arrow marker -->
+                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                    </marker>
+                </defs>
+                
+                <!-- PHASE 1: USER ONBOARDING -->
+                <g class="phase-group">
+                    <rect x="50" y="50" width="1500" height="140" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2" rx="10"/>
+                    <text x="800" y="80" text-anchor="middle" font-size="18" font-weight="bold" fill="#2c3e50">
+                        PHASE 1: User Onboarding & Registration
+                    </text>
+                    
+                    <!-- Step 1: Landing Page -->
+                    <g class="flow-step" data-tooltip="User visits the BhooDrishti website">
+                        <rect x="80" y="100" width="120" height="70" fill="url(#userGradient)" stroke="#667eea" stroke-width="2" rx="8"/>
+                        <text x="140" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Landing Page</text>
+                        <text x="140" y="140" text-anchor="middle" font-size="10" fill="white">Visit Website</text>
+                        <text x="140" y="155" text-anchor="middle" font-size="10" fill="white">Learn Features</text>
+                    </g>
+                    
+                    <!-- Step 2: Registration -->
+                    <g class="flow-step" data-tooltip="User creates account with email verification">
+                        <rect x="250" y="100" width="120" height="70" fill="url(#userGradient)" stroke="#667eea" stroke-width="2" rx="8"/>
+                        <text x="310" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Registration</text>
+                        <text x="310" y="140" text-anchor="middle" font-size="10" fill="white">Create Account</text>
+                        <text x="310" y="155" text-anchor="middle" font-size="10" fill="white">Email Verification</text>
+                    </g>
+                    
+                    <!-- Step 3: Login -->
+                    <g class="flow-step" data-tooltip="User logs in with credentials">
+                        <rect x="420" y="100" width="120" height="70" fill="url(#userGradient)" stroke="#667eea" stroke-width="2" rx="8"/>
+                        <text x="480" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Login</text>
+                        <text x="480" y="140" text-anchor="middle" font-size="10" fill="white">Authentication</text>
+                        <text x="480" y="155" text-anchor="middle" font-size="10" fill="white">Session Start</text>
+                    </g>
+                    
+                    <!-- Step 4: Dashboard -->
+                    <g class="flow-step" data-tooltip="User sees main dashboard with overview">
+                        <rect x="590" y="100" width="120" height="70" fill="url(#userGradient)" stroke="#667eea" stroke-width="2" rx="8"/>
+                        <text x="650" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Dashboard</text>
+                        <text x="650" y="140" text-anchor="middle" font-size="10" fill="white">Welcome Screen</text>
+                        <text x="650" y="155" text-anchor="middle" font-size="10" fill="white">Quick Actions</text>
+                    </g>
+                    
+                    <!-- Step 5: Tutorial -->
+                    <g class="flow-step" data-tooltip="Optional tutorial for first-time users">
+                        <rect x="760" y="100" width="120" height="70" fill="url(#userGradient)" stroke="#667eea" stroke-width="2" rx="8"/>
+                        <text x="820" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Tutorial</text>
+                        <text x="820" y="140" text-anchor="middle" font-size="10" fill="white">(Optional)</text>
+                        <text x="820" y="155" text-anchor="middle" font-size="10" fill="white">Feature Guide</text>
+                    </g>
+                    
+                    <!-- Flow arrows for Phase 1 -->
+                    <line x1="200" y1="135" x2="250" y2="135" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="370" y1="135" x2="420" y2="135" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="540" y1="135" x2="590" y2="135" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="710" y1="135" x2="760" y2="135" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                </g>
+                
+                <!-- PHASE 2: AOI DEFINITION -->
+                <g class="phase-group">
+                    <rect x="50" y="220" width="1500" height="140" fill="#e8f5e8" stroke="#4caf50" stroke-width="2" rx="10"/>
+                    <text x="800" y="250" text-anchor="middle" font-size="18" font-weight="bold" fill="#2c3e50">
+                        PHASE 2: Area of Interest (AOI) Definition
+                    </text>
+                    
+                    <!-- Step 6: Map Interface -->
+                    <g class="flow-step" data-tooltip="Interactive map for AOI selection">
+                        <rect x="80" y="270" width="140" height="70" fill="url(#systemGradient)" stroke="#11998e" stroke-width="2" rx="8"/>
+                        <text x="150" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Map Interface</text>
+                        <text x="150" y="310" text-anchor="middle" font-size="10" fill="white">OpenLayers Map</text>
+                        <text x="150" y="325" text-anchor="middle" font-size="10" fill="white">Drawing Tools</text>
+                    </g>
+                    
+                    <!-- Step 7: Draw AOI -->
+                    <g class="flow-step" data-tooltip="User draws polygon on map">
+                        <rect x="270" y="270" width="140" height="70" fill="url(#systemGradient)" stroke="#11998e" stroke-width="2" rx="8"/>
+                        <text x="340" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Draw AOI</text>
+                        <text x="340" y="310" text-anchor="middle" font-size="10" fill="white">Polygon Drawing</text>
+                        <text x="340" y="325" text-anchor="middle" font-size="10" fill="white">Coordinate Capture</text>
+                    </g>
+                    
+                    <!-- Step 8: AOI Validation -->
+                    <g class="flow-step" data-tooltip="System validates AOI geometry and size">
+                        <rect x="460" y="270" width="140" height="70" fill="url(#systemGradient)" stroke="#11998e" stroke-width="2" rx="8"/>
+                        <text x="530" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="white">AOI Validation</text>
+                        <text x="530" y="310" text-anchor="middle" font-size="10" fill="white">Size Check</text>
+                        <text x="530" y="325" text-anchor="middle" font-size="10" fill="white">Geometry Validation</text>
+                    </g>
+                    
+                    <!-- Step 9: AOI Details -->
+                    <g class="flow-step" data-tooltip="User provides AOI name and description">
+                        <rect x="650" y="270" width="140" height="70" fill="url(#systemGradient)" stroke="#11998e" stroke-width="2" rx="8"/>
+                        <text x="720" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="white">AOI Details</text>
+                        <text x="720" y="310" text-anchor="middle" font-size="10" fill="white">Name & Description</text>
+                        <text x="720" y="325" text-anchor="middle" font-size="10" fill="white">Tags & Category</text>
+                    </g>
+                    
+                    <!-- Step 10: Save AOI -->
+                    <g class="flow-step" data-tooltip="AOI saved to database">
+                        <rect x="840" y="270" width="140" height="70" fill="url(#systemGradient)" stroke="#11998e" stroke-width="2" rx="8"/>
+                        <text x="910" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Save AOI</text>
+                        <text x="910" y="310" text-anchor="middle" font-size="10" fill="white">Database Storage</text>
+                        <text x="910" y="325" text-anchor="middle" font-size="10" fill="white">PostGIS Geometry</text>
+                    </g>
+                    
+                    <!-- Flow arrows for Phase 2 -->
+                    <line x1="220" y1="305" x2="270" y2="305" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="410" y1="305" x2="460" y2="305" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="600" y1="305" x2="650" y2="305" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="790" y1="305" x2="840" y2="305" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                </g>
+                
+                <!-- PHASE 3: ALERT CONFIGURATION -->
+                <g class="phase-group">
+                    <rect x="50" y="390" width="1500" height="140" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="10"/>
+                    <text x="800" y="420" text-anchor="middle" font-size="18" font-weight="bold" fill="#2c3e50">
+                        PHASE 3: Alert Configuration & Monitoring Setup
+                    </text>
+                    
+                    <!-- Step 11: Change Types -->
+                    <g class="flow-step" data-tooltip="User selects types of changes to monitor">
+                        <rect x="80" y="440" width="140" height="70" fill="url(#alertGradient)" stroke="#ff9a9e" stroke-width="2" rx="8"/>
+                        <text x="150" y="465" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Change Types</text>
+                        <text x="150" y="480" text-anchor="middle" font-size="10" fill="white">Deforestation</text>
+                        <text x="150" y="495" text-anchor="middle" font-size="10" fill="white">Urban Expansion</text>
+                    </g>
+                    
+                    <!-- Step 12: Thresholds -->
+                    <g class="flow-step" data-tooltip="Set sensitivity thresholds for detection">
+                        <rect x="270" y="440" width="140" height="70" fill="url(#alertGradient)" stroke="#ff9a9e" stroke-width="2" rx="8"/>
+                        <text x="340" y="465" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Set Thresholds</text>
+                        <text x="340" y="480" text-anchor="middle" font-size="10" fill="white">Sensitivity Level</text>
+                        <text x="340" y="495" text-anchor="middle" font-size="10" fill="white">Min Area Changes</text>
+                    </g>
+                    
+                    <!-- Step 13: Notification Preferences -->
+                    <g class="flow-step" data-tooltip="Configure how to receive alerts">
+                        <rect x="460" y="440" width="140" height="70" fill="url(#alertGradient)" stroke="#ff9a9e" stroke-width="2" rx="8"/>
+                        <text x="530" y="465" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Notifications</text>
+                        <text x="530" y="480" text-anchor="middle" font-size="10" fill="white">Email/SMS Setup</text>
+                        <text x="530" y="495" text-anchor="middle" font-size="10" fill="white">Frequency Settings</text>
+                    </g>
+                    
+                    <!-- Step 14: Schedule -->
+                    <g class="flow-step" data-tooltip="Set monitoring schedule and frequency">
+                        <rect x="650" y="440" width="140" height="70" fill="url(#alertGradient)" stroke="#ff9a9e" stroke-width="2" rx="8"/>
+                        <text x="720" y="465" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Schedule</text>
+                        <text x="720" y="480" text-anchor="middle" font-size="10" fill="white">Monitoring Frequency</text>
+                        <text x="720" y="495" text-anchor="middle" font-size="10" fill="white">Date Range</text>
+                    </g>
+                    
+                    <!-- Step 15: Activate -->
+                    <g class="flow-step" data-tooltip="Activate monitoring for the AOI">
+                        <rect x="840" y="440" width="140" height="70" fill="url(#alertGradient)" stroke="#ff9a9e" stroke-width="2" rx="8"/>
+                        <text x="910" y="465" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Activate</text>
+                        <text x="910" y="480" text-anchor="middle" font-size="10" fill="white">Start Monitoring</text>
+                        <text x="910" y="495" text-anchor="middle" font-size="10" fill="white">Job Scheduling</text>
+                    </g>
+                    
+                    <!-- Flow arrows for Phase 3 -->
+                    <line x1="220" y1="475" x2="270" y2="475" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="410" y1="475" x2="460" y2="475" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="600" y1="475" x2="650" y2="475" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="790" y1="475" x2="840" y2="475" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                </g>
+                
+                <!-- PHASE 4: SYSTEM PROCESSING -->
+                <g class="phase-group">
+                    <rect x="50" y="560" width="1500" height="160" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="10"/>
+                    <text x="800" y="590" text-anchor="middle" font-size="18" font-weight="bold" fill="#2c3e50">
+                        PHASE 4: Automated System Processing (Background)
+                    </text>
+                    
+                    <!-- Step 16: Data Collection -->
+                    <g class="flow-step" data-tooltip="System collects satellite imagery">
+                        <rect x="80" y="610" width="130" height="80" fill="url(#dataGradient)" stroke="#a8edea" stroke-width="2" rx="8"/>
+                        <text x="145" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Data Collection</text>
+                        <text x="145" y="650" text-anchor="middle" font-size="9" fill="#333">GEE API Query</text>
+                        <text x="145" y="665" text-anchor="middle" font-size="9" fill="#333">Sentinel-2/Landsat</text>
+                        <text x="145" y="680" text-anchor="middle" font-size="9" fill="#333">Cloud Filtering</text>
+                    </g>
+                    
+                    <!-- Step 17: Preprocessing -->
+                    <g class="flow-step" data-tooltip="Image preprocessing and quality control">
+                        <rect x="240" y="610" width="130" height="80" fill="url(#dataGradient)" stroke="#a8edea" stroke-width="2" rx="8"/>
+                        <text x="305" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Preprocessing</text>
+                        <text x="305" y="650" text-anchor="middle" font-size="9" fill="#333">Cloud Masking</text>
+                        <text x="305" y="665" text-anchor="middle" font-size="9" fill="#333">Shadow Removal</text>
+                        <text x="305" y="680" text-anchor="middle" font-size="9" fill="#333">Normalization</text>
+                    </g>
+                    
+                    <!-- Step 18: Change Detection -->
+                    <g class="flow-step" data-tooltip="Advanced change detection algorithms">
+                        <rect x="400" y="610" width="130" height="80" fill="url(#dataGradient)" stroke="#a8edea" stroke-width="2" rx="8"/>
+                        <text x="465" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Change Detection</text>
+                        <text x="465" y="650" text-anchor="middle" font-size="9" fill="#333">NDVI Analysis</text>
+                        <text x="465" y="665" text-anchor="middle" font-size="9" fill="#333">Spectral Indices</text>
+                        <text x="465" y="680" text-anchor="middle" font-size="9" fill="#333">Classification</text>
+                    </g>
+                    
+                    <!-- Step 19: Analysis -->
+                    <g class="flow-step" data-tooltip="Change analysis and quantification">
+                        <rect x="560" y="610" width="130" height="80" fill="url(#dataGradient)" stroke="#a8edea" stroke-width="2" rx="8"/>
+                        <text x="625" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Analysis</text>
+                        <text x="625" y="650" text-anchor="middle" font-size="9" fill="#333">Area Calculation</text>
+                        <text x="625" y="665" text-anchor="middle" font-size="9" fill="#333">Severity Assessment</text>
+                        <text x="625" y="680" text-anchor="middle" font-size="9" fill="#333">Confidence Scoring</text>
+                    </g>
+                    
+                    <!-- Step 20: Quality Check -->
+                    <g class="flow-step" data-tooltip="Quality control and validation">
+                        <rect x="720" y="610" width="130" height="80" fill="url(#dataGradient)" stroke="#a8edea" stroke-width="2" rx="8"/>
+                        <text x="785" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Quality Check</text>
+                        <text x="785" y="650" text-anchor="middle" font-size="9" fill="#333">False Positive Filter</text>
+                        <text x="785" y="665" text-anchor="middle" font-size="9" fill="#333">Threshold Validation</text>
+                        <text x="785" y="680" text-anchor="middle" font-size="9" fill="#333">Confidence Assessment</text>
+                    </g>
+                    
+                    <!-- Step 21: Report Generation -->
+                    <g class="flow-step" data-tooltip="Generate comprehensive reports">
+                        <rect x="880" y="610" width="130" height="80" fill="url(#dataGradient)" stroke="#a8edea" stroke-width="2" rx="8"/>
+                        <text x="945" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Report Generation</text>
+                        <text x="945" y="650" text-anchor="middle" font-size="9" fill="#333">Change Maps</text>
+                        <text x="945" y="665" text-anchor="middle" font-size="9" fill="#333">Statistics</text>
+                        <text x="945" y="680" text-anchor="middle" font-size="9" fill="#333">Recommendations</text>
+                    </g>
+                    
+                    <!-- Flow arrows for Phase 4 -->
+                    <line x1="210" y1="650" x2="240" y2="650" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="370" y1="650" x2="400" y2="650" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="530" y1="650" x2="560" y2="650" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="690" y1="650" x2="720" y2="650" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="850" y1="650" x2="880" y2="650" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                </g>
+                
+                <!-- PHASE 5: USER NOTIFICATION & ACTION -->
+                <g class="phase-group">
+                    <rect x="50" y="750" width="1500" height="140" fill="#fce4ec" stroke="#e91e63" stroke-width="2" rx="10"/>
+                    <text x="800" y="780" text-anchor="middle" font-size="18" font-weight="bold" fill="#2c3e50">
+                        PHASE 5: User Notification & Action
+                    </text>
+                    
+                    <!-- Step 22: Alert Trigger -->
+                    <g class="flow-step" data-tooltip="System triggers alert if change detected">
+                        <rect x="80" y="800" width="140" height="70" fill="#e91e63" stroke="#ad1457" stroke-width="2" rx="8"/>
+                        <text x="150" y="825" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Alert Trigger</text>
+                        <text x="150" y="840" text-anchor="middle" font-size="10" fill="white">Change Detected</text>
+                        <text x="150" y="855" text-anchor="middle" font-size="10" fill="white">Threshold Exceeded</text>
+                    </g>
+                    
+                    <!-- Step 23: Notification Delivery -->
+                    <g class="flow-step" data-tooltip="User receives notification via chosen channels">
+                        <rect x="270" y="800" width="140" height="70" fill="#e91e63" stroke="#ad1457" stroke-width="2" rx="8"/>
+                        <text x="340" y="825" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Notification</text>
+                        <text x="340" y="840" text-anchor="middle" font-size="10" fill="white">Email/SMS Sent</text>
+                        <text x="340" y="855" text-anchor="middle" font-size="10" fill="white">Dashboard Update</text>
+                    </g>
+                    
+                    <!-- Step 24: User Review -->
+                    <g class="flow-step" data-tooltip="User reviews the alert and change details">
+                        <rect x="460" y="800" width="140" height="70" fill="#e91e63" stroke="#ad1457" stroke-width="2" rx="8"/>
+                        <text x="530" y="825" text-anchor="middle" font-size="12" font-weight="bold" fill="white">User Review</text>
+                        <text x="530" y="840" text-anchor="middle" font-size="10" fill="white">View Dashboard</text>
+                        <text x="530" y="855" text-anchor="middle" font-size="10" fill="white">Analyze Changes</text>
+                    </g>
+                    
+                    <!-- Step 25: Detailed Analysis -->
+                    <g class="flow-step" data-tooltip="User examines detailed change maps and data">
+                        <rect x="650" y="800" width="140" height="70" fill="#e91e63" stroke="#ad1457" stroke-width="2" rx="8"/>
+                        <text x="720" y="825" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Detailed View</text>
+                        <text x="720" y="840" text-anchor="middle" font-size="10" fill="white">Change Maps</text>
+                        <text x="720" y="855" text-anchor="middle" font-size="10" fill="white">Statistics</text>
+                    </g>
+                    
+                    <!-- Step 26: Export/Action -->
+                    <g class="flow-step" data-tooltip="User exports data or takes action">
+                        <rect x="840" y="800" width="140" height="70" fill="#e91e63" stroke="#ad1457" stroke-width="2" rx="8"/>
+                        <text x="910" y="825" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Export/Action</text>
+                        <text x="910" y="840" text-anchor="middle" font-size="10" fill="white">Download Reports</text>
+                        <text x="910" y="855" text-anchor="middle" font-size="10" fill="white">Share/Forward</text>
+                    </g>
+                    
+                    <!-- Flow arrows for Phase 5 -->
+                    <line x1="220" y1="835" x2="270" y2="835" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="410" y1="835" x2="460" y2="835" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="600" y1="835" x2="650" y2="835" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="790" y1="835" x2="840" y2="835" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                </g>
+                
+                <!-- DECISION POINTS AND LOOPS -->
+                <!-- Decision Diamond: Change Detected? -->
+                <polygon points="1200,650 1250,620 1300,650 1250,680" fill="#ffc107" stroke="#ff8f00" stroke-width="2"/>
+                <text x="1250" y="645" text-anchor="middle" font-size="10" font-weight="bold">Change</text>
+                <text x="1250" y="660" text-anchor="middle" font-size="10" font-weight="bold">Detected?</text>
+                
+                <!-- Loop arrows -->
+                <line x1="1010" y1="650" x2="1200" y2="650" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                <line x1="1250" y1="680" x2="1250" y2="750" stroke="#e91e63" stroke-width="3" marker-end="url(#arrow)"/>
+                <text x="1260" y="715" font-size="10" fill="#e91e63" font-weight="bold">YES</text>
+                
+                <!-- No change loop -->
+                <path d="M 1300 650 Q 1350 650 1350 580 Q 1350 540 800 540 Q 100 540 100 600" 
+                      stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="1320" y="640" font-size="10" fill="#4caf50" font-weight="bold">NO</text>
+                <text x="1360" y="580" font-size="10" fill="#4caf50">Continue Monitoring</text>
+                
+                <!-- Continuous monitoring indication -->
+                <rect x="1350" y="580" width="200" height="40" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="5"/>
+                <text x="1450" y="595" text-anchor="middle" font-size="10" fill="#2c3e50">Continuous Monitoring</text>
+                <text x="1450" y="610" text-anchor="middle" font-size="9" fill="#666">Scheduled Jobs Active</text>
+                
+                <!-- User Actions Branch -->
+                <rect x="1100" y="920" width="400" height="120" fill="#f5f5f5" stroke="#999" stroke-width="2" rx="10"/>
+                <text x="1300" y="945" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">
+                    Optional User Actions
+                </text>
+                
+                <!-- Feedback -->
+                <rect x="1120" y="960" width="110" height="50" fill="#9c27b0" stroke="#7b1fa2" stroke-width="2" rx="5"/>
+                <text x="1175" y="980" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Provide</text>
+                <text x="1175" y="995" text-anchor="middle" font-size="10" fill="white">Feedback</text>
+                
+                <!-- Share -->
+                <rect x="1245" y="960" width="110" height="50" fill="#9c27b0" stroke="#7b1fa2" stroke-width="2" rx="5"/>
+                <text x="1300" y="980" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Share with</text>
+                <text x="1300" y="995" text-anchor="middle" font-size="10" fill="white">Stakeholders</text>
+                
+                <!-- Field Verification -->
+                <rect x="1370" y="960" width="110" height="50" fill="#9c27b0" stroke="#7b1fa2" stroke-width="2" rx="5"/>
+                <text x="1425" y="980" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Field</text>
+                <text x="1425" y="995" text-anchor="middle" font-size="10" fill="white">Verification</text>
+                
+                <!-- Connect export to user actions -->
+                <line x1="910" y1="870" x2="1300" y2="920" stroke="#9c27b0" stroke-width="2" marker-end="url(#arrow)"/>
+                
+                <!-- Phase connectors -->
+                <line x1="800" y1="190" x2="800" y2="220" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+                <line x1="800" y1="360" x2="800" y2="390" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+                <line x1="800" y1="530" x2="800" y2="560" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+                
+                <!-- System Performance Indicators -->
+                <rect x="50" y="1070" width="300" height="100" fill="#fff9c4" stroke="#f57f17" stroke-width="2" rx="8"/>
+                <text x="200" y="1095" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">
+                    Performance Metrics
+                </text>
+                <text x="70" y="1115" font-size="11" fill="#333">⏱️ Processing Time: &lt; 15 min</text>
+                <text x="70" y="1130" font-size="11" fill="#333">🎯 Accuracy: &gt; 85%</text>
+                <text x="70" y="1145" font-size="11" fill="#333">📊 False Positives: &lt; 10%</text>
+                <text x="70" y="1160" font-size="11" fill="#333">🔄 Monitoring: 24/7</text>
+                
+                <!-- Data Formats -->
+                <rect x="380" y="1070" width="300" height="100" fill="#e1f5fe" stroke="#0288d1" stroke-width="2" rx="8"/>
+                <text x="530" y="1095" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">
+                    Export Formats
+                </text>
+                <text x="400" y="1115" font-size="11" fill="#333">📄 GeoJSON for web apps</text>
+                <text x="400" y="1130" font-size="11" fill="#333">🗺️ Shapefile for GIS</text>
+                <text x="400" y="1145" font-size="11" fill="#333">🖼️ GeoTIFF for analysis</text>
+                <text x="400" y="1160" font-size="11" fill="#333">📊 CSV for statistics</text>
+                
+                <!-- Security Features -->
+                <rect x="710" y="1070" width="300" height="100" fill="#fce4ec" stroke="#c2185b" stroke-width="2" rx="8"/>
+                <text x="860" y="1095" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">
+                    Security Features
+                </text>
+                <text x="730" y="1115" font-size="11" fill="#333">🔐 OAuth2 Authentication</text>
+                <text x="730" y="1130" font-size="11" fill="#333">🛡️ Role-based Access</text>
+                <text x="730" y="1145" font-size="11" fill="#333">🔒 Data Encryption</text>
+                <text x="730" y="1160" font-size="11" fill="#333">📋 Audit Logging</text>
+                
+                <!-- Mobile Responsiveness -->
+                <rect x="1040" y="1070" width="300" height="100" fill="#e8f5e8" stroke="#388e3c" stroke-width="2" rx="8"/>
+                <text x="1190" y="1095" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">
+                    Accessibility
+                </text>
+                <text x="1060" y="1115" font-size="11" fill="#333">📱 Mobile Responsive</text>
+                <text x="1060" y="1130" font-size="11" fill="#333">🌐 Cross-browser Support</text>
+                <text x="1060" y="1145" font-size="11" fill="#333">♿ WCAG Compliant</text>
+                <text x="1060" y="1160" font-size="11" fill="#333">🎨 Intuitive UI/UX</text>
+            </svg>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <span>User Interface Actions</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"></div>
+                <span>AOI Definition Process</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);"></div>
+                <span>Alert Configuration</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                <span>System Processing</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #e91e63;"></div>
+                <span>Notifications & Actions</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ffc107;"></div>
+                <span>Decision Points</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tooltip element -->
+    <div class="tooltip" id="tooltip"></div>
+    
+    <script>
+        // Interactive tooltips
+        const flowSteps = document.querySelectorAll('.flow-step');
+        const tooltip = document.getElementById('tooltip');
+        
+        flowSteps.forEach(step => {
+            step.addEventListener('mouseenter', (e) => {
+                const tooltipText = step.getAttribute('data-tooltip');
+                if (tooltipText) {
+                    tooltip.textContent = tooltipText;
+                    tooltip.style.opacity = '1';
+                }
+            });
+            
+            step.addEventListener('mousemove', (e) => {
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY - 10 + 'px';
+            });
+            
+            step.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = '0';
+            });
+        });
+        
+        // Click interactions for detailed information
+        flowSteps.forEach(step => {
+            step.addEventListener('click', (e) => {
+                const rect = step.querySelector('rect');
+                const currentFill = rect.getAttribute('fill');
+                
+                // Reset all other steps
+                flowSteps.forEach(otherStep => {
+                    if (otherStep !== step) {
+                        const otherRect = otherStep.querySelector('rect');
+                        otherRect.style.filter = 'none';
+                    }
+                });
+                
+                // Highlight clicked step
+                rect.style.filter = 'brightness(1.2) drop-shadow(0 0 10px rgba(0,0,0,0.5))';
+                
+                console.log('Clicked step:', step.getAttribute('data-tooltip'));
+            });
+        });
+        
+        // Add animation for phase transitions
+        const phaseGroups = document.querySelectorAll('.phase-group');
+        
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        phaseGroups.forEach(group => {
+            group.style.opacity = '0.7';
+            group.style.transform = 'translateY(20px)';
+            group.style.transition = 'all 0.6s ease-out';
+            observer.observe(group);
+        });
+    </script>
+</body>
+</html>

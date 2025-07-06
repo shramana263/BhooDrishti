@@ -1,0 +1,296 @@
+{
+    "detection_results": {
+        "vegetation": {
+            "change_image": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/e93b2719ef5e5ffb457a9199f136fa79-03cccd0d389ad8800a45ea5ac0d733e6:getPixels",
+                "metadata": {
+                    "bands": [
+                        "NDVI_diff"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "deforestation_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/b68f1111d9e901b75050dad139162f6c-6cf6aab66e4b1dab90f32f2efa60067f:getPixels",
+                "metadata": {
+                    "bands": [
+                        "deforestation"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "afforestation_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/11f514dc2a19a098605a8ce0275677a6-69fb2032d4e09c4aab53bcc5d667d2d2:getPixels",
+                "metadata": {
+                    "bands": [
+                        "afforestation"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "statistics": {
+                "deforestation_area": {
+                    "deforestation": 0
+                },
+                "afforestation_area": {
+                    "afforestation": 0
+                },
+                "mean_ndvi_change": {
+                    "NDVI_diff": null
+                }
+            }
+        },
+        "urban": {
+            "change_image": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/c28ff5de34cf49cf7371b5d598d4433b-73360faca03844ef3e38ea7450502b52:getPixels",
+                "metadata": {
+                    "bands": [
+                        "NDBI_diff"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "urban_expansion_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/9e0928db0696684f05958058c15fa6fe-8f624cc71d34823d11903980b62838fa:getPixels",
+                "metadata": {
+                    "bands": [
+                        "urban_change"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "statistics": {
+                "urban_expansion_area": {
+                    "urban_change": 0
+                },
+                "mean_ndbi_change": {
+                    "NDBI_diff": null
+                }
+            }
+        },
+        "water": {
+            "water_loss_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/52053b68ffd4e8c775d546a431bfae5d-0bf92fa3473c0d0353ce932a41915dfe:getPixels",
+                "metadata": {
+                    "bands": [
+                        "water_loss"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "water_gain_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/83122fdd2509889c56cd01f4bfe8f5cb-7c3a07720c04ca287a1c70811029c18c:getPixels",
+                "metadata": {
+                    "bands": [
+                        "water_gain"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "before_water_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/c0bb24a2a5429af930e2fcbfa816a550-16fbb75c996aae5cef61b8d62a09b0c8:getPixels",
+                "metadata": {
+                    "bands": [
+                        "water_before"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "after_water_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/d58dc249e8e246fd4d73f38a9abb24fc-6954e549b5583d9c2d739670542f2624:getPixels",
+                "metadata": {
+                    "bands": [
+                        "water_after"
+                    ],
+                    "scale": 100,
+                    "note": "Reduced resolution for export optimization"
+                }
+            },
+            "statistics": {
+                "water_loss_area": {
+                    "water_loss": 0
+                },
+                "water_gain_area": {
+                    "water_gain": 0
+                }
+            }
+        }
+    },
+    "analysis_report": {
+        "metadata": {
+            "start_date": "2013-01-01",
+            "end_date": "2024-12-31",
+            "mid_date": "2019-01-01T00:00:00",
+            "aoi": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            88.33427370587458,
+                            22.584707008791398
+                        ],
+                        [
+                            88.33234535609432,
+                            22.583838484125295
+                        ],
+                        [
+                            88.33221993497057,
+                            22.5810881198899
+                        ],
+                        [
+                            88.3379422737479,
+                            22.581319731626934
+                        ],
+                        [
+                            88.33662535194753,
+                            22.584576730440276
+                        ],
+                        [
+                            88.33427370587458,
+                            22.584707008791398
+                        ]
+                    ]
+                ]
+            },
+            "satellite": "sentinel2"
+        },
+        "timestamp": "2025-07-07T02:05:27.276311",
+        "aoi_info": {
+            "area_m2": 187884.97044866654,
+            "area_ha": 18.788497044866656,
+            "bounds": {
+                "geodesic": false,
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            88.33221993497057,
+                            22.58108811988987
+                        ],
+                        [
+                            88.3379422737479,
+                            22.58108811988987
+                        ],
+                        [
+                            88.3379422737479,
+                            22.584707008791426
+                        ],
+                        [
+                            88.33221993497057,
+                            22.584707008791426
+                        ],
+                        [
+                            88.33221993497057,
+                            22.58108811988987
+                        ]
+                    ]
+                ]
+            }
+        },
+        "summary": {
+            "total_changes_detected": 3,
+            "high_priority_alerts": 0,
+            "total_area_affected_ha": 0.0
+        },
+        "detailed_analysis": {
+            "deforestation": {
+                "area_affected": {
+                    "square_meters": 0,
+                    "hectares": 0.0,
+                    "percentage_of_aoi": 0.0
+                },
+                "severity": "negligible",
+                "fragmentation": {
+                    "patch_count": 1,
+                    "fragmentation_level": "low"
+                },
+                "hotspots": [
+                    {
+                        "coordinates": [
+                            0,
+                            0
+                        ],
+                        "intensity": "high"
+                    }
+                ],
+                "risk_level": "low",
+                "alert_triggered": false,
+                "recommendations": []
+            },
+            "urban_expansion": {
+                "area_expanded": {
+                    "square_meters": 0,
+                    "hectares": 0.0,
+                    "percentage_of_aoi": 0.0
+                },
+                "expansion_pattern": "scattered",
+                "proximity_analysis": {
+                    "distance_to_urban": 100,
+                    "connectivity": "connected"
+                },
+                "environmental_impact": "low",
+                "infrastructure_needs": [
+                    "connectivity_planning"
+                ],
+                "alert_triggered": false,
+                "recommendations": [
+                    "Consider consolidated development planning"
+                ]
+            },
+            "water_changes": {
+                "water_loss": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "water_gain": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "net_change": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "change_type": "minimal_change",
+                "permanency": "unknown",
+                "environmental_impact": "low",
+                "risk_assessment": "low",
+                "alert_triggered": false,
+                "recommendations": []
+            }
+        },
+        "alerts": [],
+        "recommendations": [
+            "Consider consolidated development planning"
+        ],
+        "confidence_assessment": {
+            "overall_confidence": "medium",
+            "factors": [
+                "Cloud cover within acceptable limits",
+                "Temporal gap appropriate for change detection"
+            ]
+        }
+    },
+    "status": "success",
+    "metadata": {
+        "processing_timestamp": "20250707_020538",
+        "processing_date": "2025-07-07T02:06:24.203397",
+        "export_note": "EE Images converted to download URLs or export tasks"
+    }
+}

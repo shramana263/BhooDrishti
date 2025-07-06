@@ -1,0 +1,24 @@
+
+change_detection:
+  ndvi_threshold: 0.2
+  confidence_threshold: 0.7
+  urban_threshold: 0.1
+  water_threshold: 0.0
+
+analysis:
+  significant_change_area: 1000  # m²
+  alert_thresholds:
+    deforestation: 5000  # m²
+    urban_expansion: 2000  # m²
+    water_loss: 3000  # m²
+  
+  # Severity levels
+  severity_thresholds:
+    deforestation:
+      severe: 50000  # m²
+      moderate: 10000  # m²
+      minor: 1000  # m²
+    urban_expansion:
+      severe: 20000  # m²
+      moderate: 5000  # m²
+      minor: 1000  # m²

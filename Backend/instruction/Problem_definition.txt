@@ -1,0 +1,29 @@
+Robust Change Detection, Monitoring, and Alert System on User-Defined AOI Using Multi-Temporal Satellite Imagery
+Change detection using satellite imagery plays a critical role in monitoring anthropogenic and environmental changes. Despite its potential, operational implementation faces bottlenecks such as cloud occlusions, atmospheric noise, and the difficulty in separating natural vs. human-induced changes.Imagery (~5m resolution with Red, Green, and NIR bands) from Bhoonidhi serves as an ideal input for high-frequency change analytics. The objective is to build a robust, scalable platform capable of proactive monitoring and alerting for user-defined Areas of Interest (AOIs), filtering out irrelevant seasonal or natural fluctuations.
+Objective:
+* Develop a robust and automated change detection and alert system using multi-temporal imagery.
+* Enable cloud/shadow masking and anthropogenic change isolation.
+* Empower users with self-defined AOI tools and notification capabilities.
+* Support GIS-compatible output generation for downstream spatial analysis.
+Expected Outcomes:
+* Automated pipeline for change detection with robust cloud and shadow masking.
+* Web-based platform for AOI selection, visualization, and time-series analysis.
+* Email or dashboard alerts for significant anthropogenic changes in user-defined AOIs.
+* GIS-compatible outputs including shapefiles and GeoJSON.
+Dataset Required:
+* Multi-temporal satellite imagery from Bhoonidhi (https://bhoonidhi.nrsc.gov.in).
+Suggested Tools/Technologies:
+* WebGIS Frameworks: Vue.js, Bootstrap, HTML/CSS/JS, OpenLayers, GeoServer
+* Spatial Databases: PostgreSQL with PostGIS
+* Backend and Processing: Python, Node.js
+Expected Solution / Steps to be followed to achieve the objectives:
+* Preprocessing: Implement cloud and shadow detection and masking using threshold-based or AI-enhanced models.
+* Change Detection: Utilize multi-temporal spectral analysis limited to Red, Green, and NIR bands to differentiate anthropogenic from seasonal changes.
+* AOI Selection: Web UI for user-driven AOI definition and storage.
+* Alert System: Backend services to monitor AOI changes and trigger alert notifications (email/web).
+* Data Management: Efficient storage and retrieval using spatial databases and tiled architecture.
+* Output Delivery: Export change maps in shapefile, GeoTIFF, and GeoJSON formats.
+Evaluation Parameters:
+* Functionality: End-to-end automation including AOI selection, preprocessing, detection, alerting, and output.
+* Usability: UI/UX for users with minimal technical background.
+* Reliability: Accuracy of change detection, minimization of false positives due to seasonal or natural phenomena.

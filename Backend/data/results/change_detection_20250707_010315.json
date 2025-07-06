@@ -1,0 +1,575 @@
+{
+    "detection_results": {
+        "vegetation": {
+            "change_image": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "NDVI_diff",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "float",
+                                "min": -2,
+                                "max": 2
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "deforestation_mask": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "deforestation",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "afforestation_mask": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "afforestation",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "statistics": {
+                "deforestation_area": {
+                    "deforestation": 0
+                },
+                "afforestation_area": {
+                    "afforestation": 0
+                },
+                "mean_ndvi_change": {
+                    "NDVI_diff": null
+                }
+            }
+        },
+        "urban": {
+            "change_image": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "NDBI_diff",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "float",
+                                "min": -2,
+                                "max": 2
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "urban_expansion_mask": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "urban_change",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "statistics": {
+                "urban_expansion_area": {
+                    "urban_change": 0
+                },
+                "mean_ndbi_change": {
+                    "NDBI_diff": null
+                }
+            }
+        },
+        "water": {
+            "water_loss_mask": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "water_loss",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "water_gain_mask": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "water_gain",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "before_water_mask": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "water_before",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "system:footprint": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        88.35,
+                                        22.55
+                                    ],
+                                    [
+                                        88.352,
+                                        22.55
+                                    ],
+                                    [
+                                        88.352,
+                                        22.552
+                                    ],
+                                    [
+                                        88.35,
+                                        22.552
+                                    ],
+                                    [
+                                        88.35,
+                                        22.55
+                                    ]
+                                ]
+                            ]
+                        }
+                    }
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "after_water_mask": {
+                "type": "EE_Image_Large",
+                "error": "'dict' object has no attribute 'bounds'",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "water_after",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "system:footprint": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        88.35,
+                                        22.55
+                                    ],
+                                    [
+                                        88.352,
+                                        22.55
+                                    ],
+                                    [
+                                        88.352,
+                                        22.552
+                                    ],
+                                    [
+                                        88.35,
+                                        22.552
+                                    ],
+                                    [
+                                        88.35,
+                                        22.55
+                                    ]
+                                ]
+                            ]
+                        }
+                    }
+                },
+                "note": "Image too large for direct download - use Earth Engine export"
+            },
+            "statistics": {
+                "water_loss_area": {
+                    "water_loss": 0
+                },
+                "water_gain_area": {
+                    "water_gain": 0
+                }
+            }
+        }
+    },
+    "analysis_report": {
+        "metadata": {
+            "start_date": "2023-01-01",
+            "end_date": "2023-12-31",
+            "mid_date": "2023-07-02T00:00:00",
+            "aoi": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            88.35,
+                            22.55
+                        ],
+                        [
+                            88.352,
+                            22.55
+                        ],
+                        [
+                            88.352,
+                            22.552
+                        ],
+                        [
+                            88.35,
+                            22.552
+                        ],
+                        [
+                            88.35,
+                            22.55
+                        ]
+                    ]
+                ]
+            },
+            "satellite": "sentinel2"
+        },
+        "timestamp": "2025-07-07T01:02:50.193622",
+        "aoi_info": {
+            "area_m2": 45675.776172057034,
+            "area_ha": 4.567577617205703,
+            "bounds": {
+                "geodesic": false,
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            88.35,
+                            22.549999999999972
+                        ],
+                        [
+                            88.352,
+                            22.549999999999972
+                        ],
+                        [
+                            88.352,
+                            22.552000003091
+                        ],
+                        [
+                            88.35,
+                            22.552000003091
+                        ],
+                        [
+                            88.35,
+                            22.549999999999972
+                        ]
+                    ]
+                ]
+            }
+        },
+        "summary": {
+            "total_changes_detected": 3,
+            "high_priority_alerts": 0,
+            "total_area_affected_ha": 0.0
+        },
+        "detailed_analysis": {
+            "deforestation": {
+                "area_affected": {
+                    "square_meters": 0,
+                    "hectares": 0.0,
+                    "percentage_of_aoi": 0.0
+                },
+                "severity": "negligible",
+                "fragmentation": {
+                    "patch_count": 1,
+                    "fragmentation_level": "low"
+                },
+                "hotspots": [
+                    {
+                        "coordinates": [
+                            0,
+                            0
+                        ],
+                        "intensity": "high"
+                    }
+                ],
+                "risk_level": "low",
+                "alert_triggered": false,
+                "recommendations": []
+            },
+            "urban_expansion": {
+                "area_expanded": {
+                    "square_meters": 0,
+                    "hectares": 0.0,
+                    "percentage_of_aoi": 0.0
+                },
+                "expansion_pattern": "scattered",
+                "proximity_analysis": {
+                    "distance_to_urban": 100,
+                    "connectivity": "connected"
+                },
+                "environmental_impact": "low",
+                "infrastructure_needs": [
+                    "connectivity_planning"
+                ],
+                "alert_triggered": false,
+                "recommendations": [
+                    "Consider consolidated development planning"
+                ]
+            },
+            "water_changes": {
+                "water_loss": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "water_gain": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "net_change": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "change_type": "minimal_change",
+                "permanency": "unknown",
+                "environmental_impact": "low",
+                "risk_assessment": "low",
+                "alert_triggered": false,
+                "recommendations": []
+            }
+        },
+        "alerts": [],
+        "recommendations": [
+            "Consider consolidated development planning"
+        ],
+        "confidence_assessment": {
+            "overall_confidence": "medium",
+            "factors": [
+                "Cloud cover within acceptable limits",
+                "Temporal gap appropriate for change detection"
+            ]
+        }
+    },
+    "status": "success",
+    "metadata": {
+        "processing_timestamp": "20250707_010315",
+        "processing_date": "2025-07-07T01:03:39.482831",
+        "export_note": "EE Images converted to download URLs"
+    }
+}

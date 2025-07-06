@@ -1,0 +1,195 @@
+# Preprocessing Configuration for Satellite Change Detection System
+
+# Basic preprocessing settings
+preprocessing:
+  enable_cloud_masking: true
+  enable_shadow_masking: true
+  enable_topographic_correction: true
+  enable_atmospheric_correction: true
+  
+  # Buffer distances for cloud/shadow masking (meters)
+  cloud_buffer_distance: 50
+  shadow_buffer_distance: 30
+  
+  # Temporal processing parameters
+  temporal_window: 30  # days for temporal compositing
+  min_images_per_composite: 2
+  max_images_per_composite: 10
+  
+  # Spectral processing
+  enable_spectral_indices: true
+  indices_to_calculate:
+    - NDVI
+    - NDWI
+    - NDBI
+    - EVI
+    - SAVI
+    - MSAVI
+
+# Quality control parameters
+quality_control:
+  enable_outlier_detection: true
+  enable_temporal_consistency_check: true
+  enable_spectral_validation: true
+  enable_geometric_validation: true
+  
+  # Thresholds for quality assessment
+  outlier_threshold: 2.5  # standard deviations
+  temporal_threshold: 0.3  # correlation threshold
+  spectral_threshold: 0.15  # spectral consistency threshold
+  geometric_threshold: 0.5  # geometric accuracy threshold
+  
+  # Minimum quality scores (0-1)
+  min_cloud_coverage: 0.85  # 85% cloud-free
+  min_shadow_coverage: 0.90  # 90% shadow-free
+  min_data_availability: 0.80  # 80% valid pixels
+  min_spectral_quality: 0.70  # 70% spectral quality
+  min_overall_quality: 0.60  # 60% overall quality
+
+# False positive mitigation
+false_positive_mitigation:
+  enable_confidence_filtering: true
+  enable_morphological_filtering: true
+  enable_minimum_mapping_unit: true
+  enable_temporal_filtering: true
+  
+  # Confidence thresholds
+  high_confidence_threshold: 0.80
+  medium_confidence_threshold: 0.60
+  low_confidence_threshold: 0.40
+  
+  # Morphological parameters
+  morphology_kernel_size: 1  # pixels
+  morphology_iterations: 1
+  
+  # Minimum mapping unit (square meters)
+  min_mapping_unit: 1000  # 0.1 hectares
+  
+  # Temporal filtering
+  min_temporal_persistence: 2  # minimum observations
+
+# Sensor-specific configurations
+sensors:
+  sentinel2:
+    # Cloud detection parameters
+    cloud_detection_method: "multi_method"  # qa_bands, spectral, ml
+    cloud_probability_threshold: 60
+    cirrus_threshold: 0.01
+    
+    # Shadow detection parameters
+    shadow_detection_method: "spectral_topographic"
+    shadow_probability_threshold: 40
+    
+    # Atmospheric correction
+    atmospheric_correction_method: "dos"  # dark_object_subtraction
+    
+    # Quality assessment
+    quality_bands: ["B2", "B3", "B4", "B8", "B11", "B12"]
+    scale: 10
+    
+    # Spectral indices configuration
+    indices:
+      NDVI:
+        formula: "(B8 - B4) / (B8 + B4)"
+        bands: ["B8", "B4"]
+      NDWI:
+        formula: "(B3 - B8) / (B3 + B8)"
+        bands: ["B3", "B8"]
+      NDBI:
+        formula: "(B11 - B8) / (B11 + B8)"
+        bands: ["B11", "B8"]
+      EVI:
+        formula: "2.5 * ((B8 - B4) / (B8 + 6 * B4 - 7.5 * B2 + 1))"
+        bands: ["B8", "B4", "B2"]
+      SAVI:
+        formula: "((B8 - B4) / (B8 + B4 + 0.5)) * 1.5"
+        bands: ["B8", "B4"]
+      MSAVI:
+        formula: "(2 * B8 + 1 - sqrt((2 * B8 + 1)^2 - 8 * (B8 - B4))) / 2"
+        bands: ["B8", "B4"]
+
+  landsat8:
+    # Cloud detection parameters
+    cloud_detection_method: "qa_pixel"
+    cloud_probability_threshold: 50
+    cirrus_threshold: 0.01
+    
+    # Shadow detection parameters
+    shadow_detection_method: "qa_pixel"
+    shadow_probability_threshold: 30
+    
+    # Atmospheric correction
+    atmospheric_correction_method: "dos"
+    
+    # Quality assessment
+    quality_bands: ["SR_B2", "SR_B3", "SR_B4", "SR_B5", "SR_B6", "SR_B7"]
+    scale: 30
+    
+    # Spectral indices configuration
+    indices:
+      NDVI:
+        formula: "(SR_B5 - SR_B4) / (SR_B5 + SR_B4)"
+        bands: ["SR_B5", "SR_B4"]
+      NDWI:
+        formula: "(SR_B3 - SR_B5) / (SR_B3 + SR_B5)"
+        bands: ["SR_B3", "SR_B5"]
+      NDBI:
+        formula: "(SR_B6 - SR_B5) / (SR_B6 + SR_B5)"
+        bands: ["SR_B6", "SR_B5"]
+      EVI:
+        formula: "2.5 * ((SR_B5 - SR_B4) / (SR_B5 + 6 * SR_B4 - 7.5 * SR_B2 + 1))"
+        bands: ["SR_B5", "SR_B4", "SR_B2"]
+
+  landsat9:
+    # Cloud detection parameters
+    cloud_detection_method: "qa_pixel"
+    cloud_probability_threshold: 50
+    cirrus_threshold: 0.01
+    
+    # Shadow detection parameters
+    shadow_detection_method: "qa_pixel"
+    shadow_probability_threshold: 30
+    
+    # Atmospheric correction
+    atmospheric_correction_method: "dos"
+    
+    # Quality assessment
+    quality_bands: ["SR_B2", "SR_B3", "SR_B4", "SR_B5", "SR_B6", "SR_B7"]
+    scale: 30
+    
+    # Spectral indices configuration
+    indices:
+      NDVI:
+        formula: "(SR_B5 - SR_B4) / (SR_B5 + SR_B4)"
+        bands: ["SR_B5", "SR_B4"]
+      NDWI:
+        formula: "(SR_B3 - SR_B5) / (SR_B3 + SR_B5)"
+        bands: ["SR_B3", "SR_B5"]
+      NDBI:
+        formula: "(SR_B6 - SR_B5) / (SR_B6 + SR_B5)"
+        bands: ["SR_B6", "SR_B5"]
+      EVI:
+        formula: "2.5 * ((SR_B5 - SR_B4) / (SR_B5 + 6 * SR_B4 - 7.5 * SR_B2 + 1))"
+        bands: ["SR_B5", "SR_B4", "SR_B2"]
+
+# Output settings
+output:
+  save_quality_masks: true
+  save_metadata: true
+  save_intermediate_results: false
+  compression: "lzw"
+  nodata_value: -9999
+  
+  # File naming conventions
+  file_naming:
+    date_format: "%Y%m%d"
+    include_sensor: true
+    include_processing_level: true
+
+# Logging configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_to_file: true
+  log_file_path: "logs/preprocessing.log"
+  max_log_size: "10MB"
+  backup_count: 5

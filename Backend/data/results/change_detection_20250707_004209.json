@@ -1,0 +1,328 @@
+{
+    "detection_results": {
+        "vegetation": {
+            "change_image": "EE_EXPORT_ERROR: Total request size (275430420 bytes) must be less than or equal to 50331648 bytes.",
+            "deforestation_mask": "EE_EXPORT_ERROR: Total request size (110172168 bytes) must be less than or equal to 50331648 bytes.",
+            "afforestation_mask": "EE_EXPORT_ERROR: Total request size (110172168 bytes) must be less than or equal to 50331648 bytes.",
+            "statistics": {
+                "deforestation_area": {
+                    "deforestation": 0
+                },
+                "afforestation_area": {
+                    "afforestation": 0
+                },
+                "mean_ndvi_change": {
+                    "NDVI_diff": null
+                }
+            }
+        },
+        "urban": {
+            "change_image": "EE_EXPORT_ERROR: Total request size (275430420 bytes) must be less than or equal to 50331648 bytes.",
+            "urban_expansion_mask": "EE_EXPORT_ERROR: Total request size (110172168 bytes) must be less than or equal to 50331648 bytes.",
+            "statistics": {
+                "urban_expansion_area": {
+                    "urban_change": 0
+                },
+                "mean_ndbi_change": {
+                    "NDBI_diff": null
+                }
+            }
+        },
+        "water": {
+            "water_loss_mask": "EE_EXPORT_ERROR: Total request size (110172168 bytes) must be less than or equal to 50331648 bytes.",
+            "water_gain_mask": "EE_EXPORT_ERROR: Total request size (110172168 bytes) must be less than or equal to 50331648 bytes.",
+            "before_water_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/c1ab301c2b4f942fb05d380085da9052-080c96023a7a7ab95796bc1c9dc8e17b:getPixels",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "water_before",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "system:footprint": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        88.35,
+                                        22.55
+                                    ],
+                                    [
+                                        88.36,
+                                        22.55
+                                    ],
+                                    [
+                                        88.36,
+                                        22.56
+                                    ],
+                                    [
+                                        88.35,
+                                        22.56
+                                    ],
+                                    [
+                                        88.35,
+                                        22.55
+                                    ]
+                                ]
+                            ]
+                        }
+                    }
+                }
+            },
+            "after_water_mask": {
+                "type": "EE_Image",
+                "download_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/thumbnails/d7dbbab1cb7c28a42fd778f2c3a215ba-b8fde9e01a659f0829cc1b2abebf7e64:getPixels",
+                "metadata": {
+                    "type": "Image",
+                    "bands": [
+                        {
+                            "id": "water_after",
+                            "data_type": {
+                                "type": "PixelType",
+                                "precision": "int",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "dimensions": [
+                                2,
+                                2
+                            ],
+                            "origin": [
+                                87,
+                                22
+                            ],
+                            "crs": "EPSG:4326",
+                            "crs_transform": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "system:footprint": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        88.35,
+                                        22.55
+                                    ],
+                                    [
+                                        88.36,
+                                        22.55
+                                    ],
+                                    [
+                                        88.36,
+                                        22.56
+                                    ],
+                                    [
+                                        88.35,
+                                        22.56
+                                    ],
+                                    [
+                                        88.35,
+                                        22.55
+                                    ]
+                                ]
+                            ]
+                        }
+                    }
+                }
+            },
+            "statistics": {
+                "water_loss_area": {
+                    "water_loss": 0
+                },
+                "water_gain_area": {
+                    "water_gain": 0
+                }
+            }
+        }
+    },
+    "analysis_report": {
+        "metadata": {
+            "start_date": "2023-01-01",
+            "end_date": "2023-12-31",
+            "mid_date": "2023-07-02T00:00:00",
+            "aoi": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            88.35,
+                            22.55
+                        ],
+                        [
+                            88.36,
+                            22.55
+                        ],
+                        [
+                            88.36,
+                            22.56
+                        ],
+                        [
+                            88.35,
+                            22.56
+                        ],
+                        [
+                            88.35,
+                            22.55
+                        ]
+                    ]
+                ]
+            },
+            "satellite": "sentinel2"
+        },
+        "timestamp": "2025-07-07T00:41:58.281456",
+        "aoi_info": {
+            "area_m2": 1141861.2977094885,
+            "area_ha": 114.18612977094885,
+            "bounds": {
+                "geodesic": false,
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            88.35,
+                            22.549999999999976
+                        ],
+                        [
+                            88.36,
+                            22.549999999999976
+                        ],
+                        [
+                            88.36,
+                            22.56000007729482
+                        ],
+                        [
+                            88.35,
+                            22.56000007729482
+                        ],
+                        [
+                            88.35,
+                            22.549999999999976
+                        ]
+                    ]
+                ]
+            }
+        },
+        "summary": {
+            "total_changes_detected": 3,
+            "high_priority_alerts": 0,
+            "total_area_affected_ha": 0.0
+        },
+        "detailed_analysis": {
+            "deforestation": {
+                "area_affected": {
+                    "square_meters": 0,
+                    "hectares": 0.0,
+                    "percentage_of_aoi": 0.0
+                },
+                "severity": "negligible",
+                "fragmentation": {
+                    "patch_count": 1,
+                    "fragmentation_level": "low"
+                },
+                "hotspots": [
+                    {
+                        "coordinates": [
+                            0,
+                            0
+                        ],
+                        "intensity": "high"
+                    }
+                ],
+                "risk_level": "low",
+                "alert_triggered": false,
+                "recommendations": []
+            },
+            "urban_expansion": {
+                "area_expanded": {
+                    "square_meters": 0,
+                    "hectares": 0.0,
+                    "percentage_of_aoi": 0.0
+                },
+                "expansion_pattern": "scattered",
+                "proximity_analysis": {
+                    "distance_to_urban": 100,
+                    "connectivity": "connected"
+                },
+                "environmental_impact": "low",
+                "infrastructure_needs": [
+                    "connectivity_planning"
+                ],
+                "alert_triggered": false,
+                "recommendations": [
+                    "Consider consolidated development planning"
+                ]
+            },
+            "water_changes": {
+                "water_loss": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "water_gain": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "net_change": {
+                    "square_meters": 0,
+                    "hectares": 0.0
+                },
+                "change_type": "minimal_change",
+                "permanency": "unknown",
+                "environmental_impact": "low",
+                "risk_assessment": "low",
+                "alert_triggered": false,
+                "recommendations": []
+            }
+        },
+        "alerts": [],
+        "recommendations": [
+            "Consider consolidated development planning"
+        ],
+        "confidence_assessment": {
+            "overall_confidence": "medium",
+            "factors": [
+                "Cloud cover within acceptable limits",
+                "Temporal gap appropriate for change detection"
+            ]
+        }
+    },
+    "status": "success",
+    "metadata": {
+        "processing_timestamp": "20250707_004209",
+        "processing_date": "2025-07-07T00:42:36.276766",
+        "export_note": "EE Images converted to download URLs"
+    }
+}

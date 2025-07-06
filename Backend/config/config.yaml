@@ -1,0 +1,111 @@
+# Comprehensive Configuration for Satellite Change Detection System
+
+# Google Earth Engine Configuration
+gee:
+  service_account_path: credentials/gee-service-account.json  # Path to service account JSON file (optional)
+  project_id: composite-depot-428316-f1  # Your GCP project ID (optional)
+  max_pixels: 1000000000
+  default_scale: 10
+
+# Satellite Configuration
+satellites:
+  sentinel2:
+    collection_id: "COPERNICUS/S2_SR_HARMONIZED"
+    cloud_coverage_threshold: 20
+    bands:
+      red: "B4"
+      green: "B3"
+      blue: "B2"
+      nir: "B8"
+      swir1: "B11"
+      swir2: "B12"
+    scale: 10
+  
+  landsat8:
+    collection_id: "LANDSAT/LC08/C02/T1_L2"
+    cloud_coverage_threshold: 20
+    bands:
+      red: "SR_B4"
+      green: "SR_B3"
+      blue: "SR_B2"
+      nir: "SR_B5"
+      swir1: "SR_B6"
+      swir2: "SR_B7"
+    scale: 30
+  
+  landsat9:
+    collection_id: "LANDSAT/LC09/C02/T1_L2"
+    cloud_coverage_threshold: 20
+    bands:
+      red: "SR_B4"
+      green: "SR_B3"
+      blue: "SR_B2"
+      nir: "SR_B5"
+      swir1: "SR_B6"
+      swir2: "SR_B7"
+    scale: 30
+
+# Change Detection Configuration
+change_detection:
+  ndvi_threshold: 0.2
+  confidence_threshold: 0.7
+  urban_threshold: 0.1
+  water_threshold: 0.0
+
+# Analysis Configuration
+analysis:
+  significant_change_area: 1000  # m²
+  alert_thresholds:
+    deforestation: 5000  # m²
+    urban_expansion: 2000  # m²
+    water_loss: 3000  # m²
+  
+  # Severity levels
+  severity_thresholds:
+    deforestation:
+      severe: 50000  # m²
+      moderate: 10000  # m²
+      minor: 1000  # m²
+    urban_expansion:
+      severe: 20000  # m²
+      moderate: 5000  # m²
+      minor: 1000  # m²
+
+# Preprocessing Configuration
+preprocessing:
+  enable_cloud_masking: true
+  enable_shadow_masking: true
+  enable_topographic_correction: false
+  enable_atmospheric_correction: false
+  
+  # Quality control parameters
+  quality_control:
+    enable_outlier_detection: true
+    outlier_threshold: 2.5  # standard deviations
+    min_cloud_coverage: 0.85  # 85% cloud-free
+    min_shadow_coverage: 0.90  # 90% shadow-free
+    min_data_availability: 0.80  # 80% valid pixels
+  
+  # Spectral indices to calculate
+  spectral_indices:
+    - NDVI
+    - NDWI
+    - NDBI
+    - EVI
+    - SAVI
+
+# Export Configuration
+export:
+  google_drive_folder: "GEE_ChangeDetection"
+  local_download_path: "data/exports/"
+  default_format: "GeoTIFF"
+  compression: "lzw"
+  nodata_value: -9999
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_to_file: true
+  log_file_path: "logs/change_detection.log"
+  max_log_size: "10MB"
+  backup_count: 5

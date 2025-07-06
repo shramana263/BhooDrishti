@@ -1,0 +1,105 @@
+this problem title is robust change uh robust change
+54:42
+detection monitoring and alert system on user defined AOI using multi-temporal satellite imagery To put it into simple
+54:49
+terms uh satellite imagery is actually taken on a daily basis uh through our
+54:55
+own satellites and we are able to cover very large areas and very frequently
+55:00
+let's say every 5 days or every 10 days and so on So this presents an opportunity where we can do regular
+55:07
+monitoring of wide swats of area and we can detect changes and alert the relevant authorities whenever those
+55:14
+changes happen So for example for ecological reasons and for legal reasons
+55:19
+we may need to monitor forests We may need to monitor lakes whether they are being encroached by buildings We may
+55:25
+need to monitor government-owned land areas whether they are being illegally occupied by someone else So for that we
+55:32
+wish to create a comprehensive system where users are able to come onto the system define their own areas of
+55:40
+interest which we call AUI by drawing them on a map and select what kind of
+55:45
+changes they wish to detect For example somebody could be interested that if there is any deforestation event please
+55:51
+alert me Someone could be interested that if somebody builds uh some uh
+55:57
+builds some building on my land I should get an alert and somebody might be interested in an alert that this is the
+56:04
+water body that I wish to monitor If there is any reclamation in that water body I should be alerted So for this
+56:12
+when user will define an AI and he will subscribe to certain kind of alerts the system will automatically process uh GIS
+56:21
+information It will automatically process image data obtained from satellites and it will basically process
+56:27
+multi-mporal data the before and after images and try to detect what changes have happened and then subsequently send
+56:34
+those alerts to users Right So the flow of information would be like that that once the user defines an AOI the system
+56:41
+will automatically pull up the relevant satellite data including the past imagery and the current imagery It will
+56:48
+need to pre-process the data We will talk about that pre-processing later and then finally come up with change events
+56:54
+and then those change events would be sent to users in the form of alerts Now the uh now what do we mean by processing
+57:01
+the data It means we will be downloading the data We will be doing some basic precessing like uh there could be some
+57:09
+clouds in in the images which could generate false positives We would need to first remove them so that incorrect
+57:15
+alerts are not generated Right So the expected outcomes of the system are that
+57:20
+it should be a fully automated change detection system with integrated cloud and shadow masking which means that if
+57:26
+those changes are due to cloud cover or due to shadow the user should not get falsely alerted Another thing is that it
+57:34
+should be a userfriendly app based platform which means there should be no specific software that needs to be
+57:39
+installed on user's machine and it will provide an online interface where AOI
+57:44
+will be defined by the user and in the background data will be automatically
+57:49
+downloaded from Bundi processed and change detection event should be generated Now uh we understand that it
+57:58
+might not be initially possible for everyone to set up a system where they are downloading data from Bundi So for
+58:03
+the data download pre-processing and selective change detection for experimentation purposes they can use
+58:09
+Google Earth Engine and use its APIs for detection Uh and of course whatever maps
+58:16
+and reports of changes are that are generated they should be exportable in GIS compatible format that is in the
+58:22
+form of Giojson and shape files So evaluation parameters should be in terms of functionality which means the user
+58:29
+should be able to define multiple AOIS and then save those AIS in into in their
+58:34
+own account and they should be able to specify thresholds in these thresholds could be in terms of confidence of
+58:40
+detection For example somebody could say that I don't want to miss any detection So he'll keep the probability threshold
+58:47
+lower So even if there is 30% confident that confidence that there is changed the alert should be generated or
+58:53
+somebody might want that I don't want too many false positives and he could set the confidence threshold to very
+58:58
+high let's say he says that only give me an alert if there is a 90% confidence right uh of course we will also be
+59:05
+looking at the UI and UX of the entire system how easy it is and how intuitive it is for the user to use and finally
+59:12
+we'll be focusing on reliability where you need to make sure that all the detections that you do are robust which
+59:19
+means that there are no false positive detections and at the same time if there are actual changes they should not be
+59:25
+missed So these are the three primary parameters in which uh we would be judging you Another thing to noted that
+59:32
+we want it to be a scalable and flexible system which means any detection
+59:37
+algorithm that you built into the system there should be a scope wherein in future if a new algorithm is developed
+59:43
+or if a different kind of algorithm is developed your architecture should be such that it is easy to extend the
+59:49
+system in a sense if there are newer kind of alerts that you want to build in the system it should be easy to do so So
+59:56
+this uh is what we expect you to do Uh of course if you have any questions or
+1:00:01
+queries if you need further assistance our email ids are mentioned on top of the screen and you can reach out to us
+1:00:07
+Thank you

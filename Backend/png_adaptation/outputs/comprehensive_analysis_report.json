@@ -1,0 +1,180 @@
+{
+  "metadata": {
+    "analysis_type": "PNG Satellite Change Detection",
+    "timestamp": "2025-07-08T00:05:04.774933",
+    "images": {
+      "image1_path": "/home/parambrata-ghosh/Development/Personal/Hackathon/ISRO/BhooDristi/Backend/data/raw/kpc_2014.png",
+      "image2_path": "/home/parambrata-ghosh/Development/Personal/Hackathon/ISRO/BhooDristi/Backend/data/raw/kpc_2022.png",
+      "image1_name": "kpc_2014.png",
+      "image2_name": "kpc_2022.png",
+      "start_date": "2014",
+      "end_date": "2022"
+    },
+    "analysis_period": "2014 to 2022"
+  },
+  "summary": {
+    "analysis_period": "Unknown",
+    "total_changes_detected": 3,
+    "high_priority_alerts": 3,
+    "total_area_affected_ha": 4286.12,
+    "dominant_change_type": "deforestation",
+    "overall_impact": "medium"
+  },
+  "detailed_analysis": {
+    "deforestation": {
+      "area_affected": {
+        "square_meters": 17325400,
+        "hectares": 1732.54,
+        "percentage_of_image": 47.130864358735806
+      },
+      "severity": "severe",
+      "fragmentation": {
+        "patch_count": 4266,
+        "average_patch_size_pixels": 40.61275199249883,
+        "fragmentation_level": "high"
+      },
+      "hotspots": [
+        {
+          "coordinates": [
+            298,
+            298
+          ],
+          "intensity": "high",
+          "description": "Primary change concentration area"
+        }
+      ],
+      "risk_level": "high",
+      "alert_triggered": "True",
+      "recommendations": [
+        "Immediate field verification recommended",
+        "Contact local forest authorities",
+        "Implement enhanced monitoring",
+        "Consider reforestation planning",
+        "Satellite-based verification needed",
+        "Environmental impact assessment required",
+        "Emergency conservation measures needed"
+      ],
+      "temporal_context": {
+        "analysis_period": "2014 to 2022",
+        "change_rate": "216.57 ha/year"
+      }
+    },
+    "urban_expansion": {
+      "area_expanded": {
+        "square_meters": 17139900,
+        "hectares": 1713.99,
+        "percentage_of_image": 46.6262425122823
+      },
+      "expansion_pattern": "scattered",
+      "environmental_impact": "high",
+      "infrastructure_needs": [
+        "road_access",
+        "utilities",
+        "drainage",
+        "connectivity_planning",
+        "public_transport",
+        "waste_management"
+      ],
+      "alert_triggered": "True",
+      "recommendations": [
+        "Consider consolidated development planning",
+        "Infrastructure impact assessment needed",
+        "Traffic flow analysis recommended",
+        "Comprehensive urban planning required",
+        "Environmental clearance verification"
+      ],
+      "growth_metrics": {
+        "expansion_rate": "214.25 ha/year",
+        "intensity": "high"
+      }
+    },
+    "water_changes": {
+      "water_loss": {
+        "square_meters": 8395900,
+        "hectares": 839.59,
+        "percentage_of_image": 22.83964722716416
+      },
+      "water_gain": {
+        "square_meters": 6819900,
+        "hectares": 681.99,
+        "percentage_of_image": 18.552401782362445
+      },
+      "net_change": {
+        "square_meters": -1576000,
+        "hectares": -157.6
+      },
+      "change_type": "minimal_change",
+      "environmental_impact": "low",
+      "risk_assessment": "low",
+      "alert_triggered": "True",
+      "recommendations": [],
+      "hydrological_context": {
+        "dominant_change": "loss",
+        "change_magnitude": "significant"
+      }
+    }
+  },
+  "alerts": [
+    {
+      "type": "deforestation",
+      "severity": "severe",
+      "area": {
+        "square_meters": "17325400",
+        "hectares": 1732.54,
+        "percentage_of_image": 47.130864358735806
+      },
+      "priority": "high"
+    },
+    {
+      "type": "urban_expansion",
+      "area": {
+        "square_meters": "17139900",
+        "hectares": 1713.99,
+        "percentage_of_image": 46.6262425122823
+      },
+      "pattern": "scattered",
+      "priority": "medium"
+    },
+    {
+      "type": "water_loss",
+      "area": {
+        "square_meters": "8395900",
+        "hectares": 839.59,
+        "percentage_of_image": 22.83964722716416
+      },
+      "risk": "low",
+      "priority": "medium"
+    }
+  ],
+  "recommendations": [
+    "Satellite-based verification needed",
+    "Environmental impact assessment required",
+    "Implement enhanced monitoring",
+    "Comprehensive urban planning required",
+    "Multi-hazard monitoring system recommended",
+    "Environmental clearance verification",
+    "Infrastructure impact assessment needed",
+    "Emergency conservation measures needed",
+    "Consider consolidated development planning",
+    "Contact local forest authorities",
+    "Traffic flow analysis recommended",
+    "Consider reforestation planning",
+    "Immediate field verification recommended",
+    "Immediate intervention planning required"
+  ],
+  "confidence_assessment": {
+    "overall_confidence": "medium",
+    "factors": [
+      "PNG format provides RGB channels",
+      "Spectral indices simulated from RGB",
+      "Temporal gap appropriate for change detection",
+      "Multiple change types analyzed",
+      "Note: Analysis based on simulated spectral bands"
+    ],
+    "limitations": [
+      "NIR and SWIR bands simulated from RGB",
+      "No atmospheric correction applied",
+      "Geometric accuracy not verified"
+    ]
+  }
+}

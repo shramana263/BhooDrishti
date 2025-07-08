@@ -24,7 +24,7 @@ const SatelliteMap: React.FC<SatelliteMapProps> = ({ position }) => {
       style={{ width: "100%", height: "100%" }}
     >
       <TileLayer
-        url={`https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=eOgwEnX1eyZsTiqP9t4C`}
+        url={`https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`}
         attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> contributors'
       />
       <Marker position={position} icon={DefaultIcon}>

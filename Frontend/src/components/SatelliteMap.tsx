@@ -1,51 +1,41 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import maplibregl from "maplibre-gl";
-import MapboxDraw from "mapbox-gl-draw";
-import "maplibre-gl/dist/maplibre-gl.css";
-import "mapbox-gl-draw/dist/mapbox-gl-draw.css";
+import React from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
-const MAPTILER_KEY = "eOgwEnX1eyZsTiqP9t4C"; // Replace with your key
+// Fix for default marker icons in Leaflet with Next.js
+const DefaultIcon = L.icon({
+  iconUrl: "/location-pin.png",
+  shadowUrl: "/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
 
-export default function SatelliteMap() {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<maplibregl.Map | null>(null);
-
-  useEffect(() => {
-    if (mapRef.current) return;
-
-    const map = new maplibregl.Map({
-      container: mapContainer.current!,
-      style: `https://api.maptiler.com/maps/satellite/style.json?key=${MAPTILER_KEY}`,
-      center: [88.3639, 22.5726],
-      zoom: 12,
-    });
-
-    const draw = new MapboxDraw({
-      displayControlsDefault: false,
-      controls: {
-        polygon: true,
-        trash: true,
-      },
-    });
-    map.addControl(draw, "top-right");
-
-    map.on("draw.create", (e) => {
-      const coords = e.features[0].geometry.coordinates;
-      console.log("AOI Polygon Coordinates:", coords);
-    });
-
-    mapRef.current = map;
-
-    return () => {
-      map.remove();
-    };
-  }, []);
-
-  return (
-    <div
-      ref={mapContainer}
-      style={{ width: "100%", height: "100vh", borderRadius: "8px" }}
-    />
-  );
+interface SatelliteMapProps {
+  position: [number, number];
 }
+
+const SatelliteMap: React.FC<SatelliteMapProps> = ({ position }) => {
+  return (
+    <MapContainer
+      center={position}
+      zoom={16}
+      style={{ width: "100%", height: "100%" }}
+    >
+      <TileLayer
+        url={`https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=eOgwEnX1eyZsTiqP9t4C`}
+        attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> contributors'
+      />
+      <Marker position={position} icon={DefaultIcon}>
+        <Popup>
+          Current Location
+          <br />
+          Lat: {position[0].toFixed(6)}, Lng: {position[1].toFixed(6)}
+        </Popup>
+      </Marker>
+    </MapContainer>
+  );
+};
+
+export default SatelliteMap;

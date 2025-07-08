@@ -1,18 +1,9 @@
 "use client";
-import React from "react";
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import { IoLocationSharp } from "react-icons/io5";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
-// Fix for default marker icons in Leaflet with Next.js
-const DefaultIcon = L.icon({
-  iconUrl: "/vercel.svg",
-  shadowUrl: "/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
+// Dynamically import the SatelliteMap component to ensure client-side rendering
+const SatelliteMap = dynamic(() => import("@/components/SatelliteMap"), { ssr: false });
 
 export default function Page() {
   const [position, setPosition] = useState<[number, number]>([
@@ -20,33 +11,23 @@ export default function Page() {
     88.3639,
   ]); // Default to Kolkata
 
-  const loadMapAtLocation = (lat: number, lng: number) => {
-    const zoom = 16;
-    const apiKey = "eOgwEnX1eyZsTiqP9t4C"; // Replace with your MapTiler API key
-    const url = `https://api.maptiler.com/maps/satellite/?key=${apiKey}#${zoom}/${lat}/${lng}`;
-
-    // Removed iframe code as we're using react-leaflet now
-  };
-
   useEffect(() => {
     if (typeof window !== "undefined" && "geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setPosition([latitude, longitude]);
-          // Keep loadMapAtLocation for backwards compatibility
-          loadMapAtLocation(latitude, longitude);
         },
         (error) => {
           console.error("Geolocation error:", error);
           // Fallback to Kolkata
-          loadMapAtLocation(22.58468291,88.34724883);
+          setPosition([22.58468291, 88.34724883]);
         }
       );
     } else {
       // Geolocation not supported
-      loadMapAtLocation(22.5726, 88.3639);
-      console.log("Hello else part")
+      setPosition([22.5726, 88.3639]);
+      console.log("Hello else part");
     }
   }, []);
 
@@ -112,23 +93,7 @@ export default function Page() {
       </div>
       <div className="min-h-screen w-9/12 ">
         <div style={{ width: "100%", height: "100vh" }}>
-          <MapContainer
-            center={position}
-            zoom={16}
-            style={{ width: "100%", height: "100%" }}
-          >
-            <TileLayer
-              url={`https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=eOgwEnX1eyZsTiqP9t4C`}
-              attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> contributors'
-            />
-            <Marker position={position} icon={DefaultIcon}>
-              <Popup>
-                Current Location
-                <br />
-                Lat: {position[0].toFixed(6)}, Lng: {position[1].toFixed(6)}
-              </Popup>
-            </Marker>
-          </MapContainer>
+          <SatelliteMap position={position} />
         </div>
       </div>
     </div>

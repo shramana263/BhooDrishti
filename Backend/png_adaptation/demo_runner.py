@@ -5,6 +5,7 @@ Complete demonstration of PNG-based change detection using existing system
 
 import os
 import sys
+import traceback
 from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')  # Use non-interactive backend
@@ -55,9 +56,8 @@ def run_complete_png_demo():
     
     # Define image paths
     data_dir = Path("/home/parambrata-ghosh/Development/Personal/Hackathon/ISRO/BhooDristi/Backend/data/raw")
-    image1_path = data_dir / "kpc_2014.png"
-    image2_path = data_dir / "kpc_2022.png"
-    
+    image1_path = data_dir / "kpc_2014_with_cloud.png"
+    image2_path = data_dir / "kpc_2025.png"
     # Output directory
     output_dir = Path("/home/parambrata-ghosh/Development/Personal/Hackathon/ISRO/BhooDristi/Backend/png_adaptation/outputs")
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -90,13 +90,74 @@ def run_complete_png_demo():
         print("✅ PNG images loaded and processed successfully")
         print()
         
+        # Step 1.5: Cloud Impact Assessment
+        print("☁️  Step 1.5: Cloud Impact Assessment")
+        print("-" * 40)
+        
+        cloud_impact = processor.assess_cloud_impact_for_analysis(
+            img1_data['cloud_info'], img2_data['cloud_info']
+        )
+        
+        # Display cloud assessment results
+        print(f"Cloud Assessment Results:")
+        print(f"   Image 1 cloud coverage: {cloud_impact['cloud_statistics']['image1_coverage']:.1f}%")
+        print(f"   Image 2 cloud coverage: {cloud_impact['cloud_statistics']['image2_coverage']:.1f}%")
+        print(f"   Impact level: {cloud_impact['impact_assessment'].upper()}")
+        print(f"   Analysis reliable: {'✅ YES' if cloud_impact['analysis_reliable'] else '❌ NO'}")
+        
+        if cloud_impact['warning_messages']:
+            print(f"   ⚠️  Warnings:")
+            for warning in cloud_impact['warning_messages']:
+                print(f"      • {warning}")
+        
+        # Check if analysis should proceed
+        if not cloud_impact['analysis_reliable']:
+            print()
+            print("🚫 ANALYSIS TERMINATED")
+            print("=" * 60)
+            print("❌ Change detection analysis cannot be performed reliably due to cloud interference.")
+            print()
+            print("📋 Cloud Impact Details:")
+            for limitation in cloud_impact['limitations']:
+                print(f"   • {limitation}")
+            print()
+            print("💡 Recommendations:")
+            for recommendation in cloud_impact['analysis_recommendations']:
+                print(f"   • {recommendation}")
+            print()
+            print("📊 Summary:")
+            print(f"   • This comparison involves images with {cloud_impact['cloud_statistics']['coverage_difference']:.1f}% difference in cloud coverage")
+            print(f"   • Change detection results would be unreliable and misleading")
+            print(f"   • Consider using alternative image pairs with better atmospheric conditions")
+            
+            # Create cloud interference dashboard
+            print()
+            print("🎨 Creating Cloud Interference Dashboard")
+            print("-" * 40)
+            create_cloud_interference_dashboard(
+                img1_data, img2_data, cloud_impact, output_dir, image1_path, image2_path
+            )
+            print("✅ Cloud interference dashboard created")
+            print()
+            print("📁 Dashboard saved with detailed cloud impact analysis")
+            return
+        elif cloud_impact['impact_assessment'] != 'minimal':
+            print()
+            print("⚠️  PROCEEDING WITH CAUTION")
+            print("Analysis will continue but results should be interpreted carefully.")
+            print("Cloud-affected areas may show false changes.")
+        
+        print("✅ Cloud assessment completed")
+        print()
+        
         # Step 2: Perform change detection
         print("🔍 Step 2: Change Detection Analysis")
         print("-" * 40)
         
         change_results = change_detector.comprehensive_change_detection_png(
             str(image1_path), str(image2_path),
-            change_types=['vegetation', 'urban', 'water']
+            change_types=['vegetation', 'urban', 'water'],
+            cloud_impact_info=cloud_impact  # Pass cloud impact information
         )
         
         print("✅ Change detection completed")
@@ -176,6 +237,7 @@ def display_summary_results(analysis_report: dict):
     summary = analysis_report.get('summary', {})
     alerts = analysis_report.get('alerts', [])
     detailed = analysis_report.get('detailed_analysis', {})
+    cloud_assessment = analysis_report.get('cloud_assessment', {})
     
     print(f"📊 Analysis Summary:")
     print(f"   🕒 Period: {summary.get('analysis_period', 'Unknown')}")
@@ -185,6 +247,26 @@ def display_summary_results(analysis_report: dict):
     print(f"   🎯 Dominant change: {summary.get('dominant_change_type', 'none')}")
     print(f"   ⚠️  Overall impact: {summary.get('overall_impact', 'low')}")
     print()
+    
+    # Display cloud assessment if available
+    if cloud_assessment:
+        print(f"☁️  Cloud Impact Assessment:")
+        print(f"   📊 Image 1 cloud coverage: {cloud_assessment['cloud_statistics']['image1_coverage']:.1f}%")
+        print(f"   📊 Image 2 cloud coverage: {cloud_assessment['cloud_statistics']['image2_coverage']:.1f}%")
+        print(f"   📈 Coverage difference: {cloud_assessment['cloud_statistics']['coverage_difference']:.1f}%")
+        print(f"   🎯 Impact level: {cloud_assessment['impact_level'].upper()}")
+        print(f"   ✅ Analysis reliable: {'YES' if cloud_assessment['analysis_reliable'] else 'NO'}")
+        
+        if cloud_assessment.get('warnings'):
+            print(f"   ⚠️  Warnings:")
+            for warning in cloud_assessment['warnings']:
+                print(f"      • {warning}")
+        
+        if cloud_assessment.get('limitations'):
+            print(f"   📋 Limitations:")
+            for limitation in cloud_assessment['limitations']:
+                print(f"      • {limitation}")
+        print()
     
     # Display specific findings
     if 'deforestation' in detailed:
@@ -362,7 +444,7 @@ WATER CHANGES:
              bbox=dict(boxstyle="round,pad=0.5", facecolor="lightgray", alpha=0.8))
     
     # Main title
-    fig.suptitle('BhooDrishti PNG Change Detection Dashboard\nKarnataka State (2014-2022)', 
+    fig.suptitle('BhooDrishti Report\nWest Bengal State', 
                  fontsize=16, fontweight='bold', y=0.98)
     
     plt.tight_layout()
@@ -379,6 +461,185 @@ WATER CHANGES:
     plt.close()  # Close figure to free memory
     
     print(f"📊 Dashboard saved: {dashboard_path}")
+
+
+def create_cloud_interference_dashboard(img1_data, img2_data, cloud_impact, output_dir, image1_path, image2_path):
+    """
+    Create a comprehensive dashboard for cloud interference analysis termination
+    
+    Args:
+        img1_data: First image data
+        img2_data: Second image data  
+        cloud_impact: Cloud impact assessment results
+        output_dir: Output directory path
+        image1_path: Path to first image
+        image2_path: Path to second image
+    """
+    
+    # Create figure with subplots
+    fig = plt.figure(figsize=(20, 16))
+    
+    # Original images with cloud masks
+    ax1 = plt.subplot(3, 4, 1)
+    rgb1 = np.transpose(img1_data['original_rgb'], (1, 2, 0))
+    ax1.imshow(rgb1)
+    ax1.set_title(f'Image 1: {Path(image1_path).name}\nOriginal RGB', fontsize=12, fontweight='bold')
+    ax1.axis('off')
+    
+    ax2 = plt.subplot(3, 4, 2)
+    rgb2 = np.transpose(img2_data['original_rgb'], (1, 2, 0))
+    ax2.imshow(rgb2)
+    ax2.set_title(f'Image 2: {Path(image2_path).name}\nOriginal RGB', fontsize=12, fontweight='bold')
+    ax2.axis('off')
+    
+    # Cloud masks
+    ax3 = plt.subplot(3, 4, 3)
+    cloud_mask1 = img1_data['cloud_info']['cloud_mask']
+    ax3.imshow(cloud_mask1, cmap='Blues', alpha=0.8)
+    ax3.set_title(f'Image 1: Cloud Mask\nCoverage: {cloud_impact["cloud_statistics"]["image1_coverage"]:.1f}%', 
+                  fontsize=12, fontweight='bold')
+    ax3.axis('off')
+    
+    ax4 = plt.subplot(3, 4, 4)
+    cloud_mask2 = img2_data['cloud_info']['cloud_mask']
+    ax4.imshow(cloud_mask2, cmap='Blues', alpha=0.8)
+    ax4.set_title(f'Image 2: Cloud Mask\nCoverage: {cloud_impact["cloud_statistics"]["image2_coverage"]:.1f}%', 
+                  fontsize=12, fontweight='bold')
+    ax4.axis('off')
+    
+    # Combined cloud coverage visualization
+    ax5 = plt.subplot(3, 4, 5)
+    combined_clouds = np.maximum(cloud_mask1, cloud_mask2)
+    ax5.imshow(combined_clouds, cmap='Reds', alpha=0.8)
+    ax5.set_title('Combined Cloud Coverage\n(Areas affected in either image)', 
+                  fontsize=12, fontweight='bold')
+    ax5.axis('off')
+    
+    # Cloud difference visualization
+    ax6 = plt.subplot(3, 4, 6)
+    cloud_diff = cloud_mask2.astype(float) - cloud_mask1.astype(float)
+    im6 = ax6.imshow(cloud_diff, cmap='RdBu', vmin=-1, vmax=1)
+    ax6.set_title('Cloud Difference\n(Red: More clouds in Image 2)', 
+                  fontsize=12, fontweight='bold')
+    ax6.axis('off')
+    plt.colorbar(im6, ax=ax6, fraction=0.046)
+    
+    # Reliability assessment visualization
+    ax7 = plt.subplot(3, 4, 7)
+    # Create a reliability map based on cloud coverage
+    reliability_map = np.ones_like(cloud_mask1, dtype=float)
+    reliability_map[combined_clouds > 0] = 0.3  # Low reliability in cloudy areas
+    im7 = ax7.imshow(reliability_map, cmap='RdYlGn', vmin=0, vmax=1)
+    ax7.set_title('Analysis Reliability Map\n(Green: Reliable, Red: Unreliable)', 
+                  fontsize=12, fontweight='bold')
+    ax7.axis('off')
+    plt.colorbar(im7, ax=ax7, fraction=0.046)
+    
+    # Cloud statistics pie chart
+    ax8 = plt.subplot(3, 4, 8)
+    cloud_stats = cloud_impact['cloud_statistics']
+    img1_coverage = cloud_stats['image1_coverage']
+    img2_coverage = cloud_stats['image2_coverage']
+    
+    # Create pie chart data
+    labels = ['Image 1 Clear', 'Image 1 Cloudy', 'Image 2 Clear', 'Image 2 Cloudy']
+    sizes = [100-img1_coverage, img1_coverage, 100-img2_coverage, img2_coverage]
+    colors = ['lightgreen', 'lightcoral', 'lightblue', 'darkred']
+    
+    wedges, texts, autotexts = ax8.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
+    ax8.set_title('Cloud Coverage Comparison', fontsize=12, fontweight='bold')
+    
+    # Make text smaller
+    for text in texts:
+        text.set_fontsize(8)
+    for autotext in autotexts:
+        autotext.set_fontsize(8)
+        autotext.set_color('white')
+        autotext.set_weight('bold')
+    
+    # Detailed analysis text
+    ax9 = plt.subplot(3, 4, (9, 12))
+    ax9.axis('off')
+    
+    # Create analysis termination summary text
+    termination_text = f"""
+🚫 ANALYSIS TERMINATED DUE TO CLOUD INTERFERENCE
+
+CLOUD IMPACT ASSESSMENT:
+• Impact Level: {cloud_impact['impact_assessment'].upper()}
+• Analysis Reliable: {'NO' if not cloud_impact['analysis_reliable'] else 'YES'}
+• Coverage Difference: {cloud_impact['cloud_statistics']['coverage_difference']:.1f}%
+
+CLOUD STATISTICS:
+• Image 1 Cloud Coverage: {cloud_impact['cloud_statistics']['image1_coverage']:.1f}%
+• Image 2 Cloud Coverage: {cloud_impact['cloud_statistics']['image2_coverage']:.1f}%
+• Maximum Coverage: {cloud_impact['cloud_statistics']['max_coverage']:.1f}%
+• Minimum Coverage: {cloud_impact['cloud_statistics']['min_coverage']:.1f}%
+
+ANALYSIS LIMITATIONS:
+"""
+    
+    for limitation in cloud_impact.get('limitations', []):
+        termination_text += f"• {limitation}\n"
+    
+    termination_text += "\nRECOMMENDations:\n"
+    for recommendation in cloud_impact.get('analysis_recommendations', []):
+        termination_text += f"• {recommendation}\n"
+    
+    if cloud_impact.get('warning_messages'):
+        termination_text += "\n⚠️ WARNINGS:\n"
+        for warning in cloud_impact['warning_messages']:
+            termination_text += f"• {warning}\n"
+    
+    termination_text += f"""
+CONCLUSION:
+Change detection analysis cannot be performed reliably due to significant 
+cloud interference. The difference in cloud coverage between images 
+({cloud_impact['cloud_statistics']['coverage_difference']:.1f}%) would lead to 
+false change detections and unreliable results.
+
+NEXT STEPS:
+• Acquire images with better atmospheric conditions
+• Use cloud-free image pairs from the same season
+• Consider using radar data for all-weather monitoring
+• Apply advanced cloud removal algorithms if available
+"""
+    
+    ax9.text(0.05, 0.95, termination_text, transform=ax9.transAxes, 
+             fontsize=10, verticalalignment='top', fontfamily='monospace',
+             bbox=dict(boxstyle="round,pad=0.5", facecolor="mistyrose", alpha=0.9))
+    
+    # Main title
+    fig.suptitle('BhooDrishti Cloud Interference Report\nAnalysis Terminated Due to Poor Image Quality', 
+                 fontsize=16, fontweight='bold', y=0.98, color='darkred')
+    
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.94, hspace=0.3, wspace=0.3)
+    
+    # Save dashboard
+    dashboard_path = Path(output_dir) / "cloud_interference_dashboard.png"
+    plt.savefig(dashboard_path, dpi=150, bbox_inches='tight')
+    
+    # Don't show plot in non-interactive environment
+    if matplotlib.get_backend() != 'Agg':
+        plt.show()
+    
+    plt.close()  # Close figure to free memory
+    
+    print(f"📊 Cloud interference dashboard saved: {dashboard_path}")
+    
+    # Also save a summary report
+    summary_report_path = Path(output_dir) / "cloud_interference_report.txt"
+    with open(summary_report_path, 'w') as f:
+        f.write("BhooDrishti Cloud Interference Analysis Report\n")
+        f.write("=" * 50 + "\n\n")
+        f.write(f"Analysis Date: {cloud_impact.get('analysis_date', 'Unknown')}\n")
+        f.write(f"Image 1: {Path(image1_path).name}\n")
+        f.write(f"Image 2: {Path(image2_path).name}\n\n")
+        f.write("TERMINATION REASON: Cloud interference makes change detection unreliable\n\n")
+        f.write(termination_text.replace('🚫', '').replace('⚠️', 'WARNING:'))
+    
+    print(f"📄 Text report saved: {summary_report_path}")
 
 
 if __name__ == "__main__":

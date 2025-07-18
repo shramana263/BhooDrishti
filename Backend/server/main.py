@@ -1,11 +1,15 @@
-from fastapi import FastAPI, File, UploadFile, Form
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Union, List, Optional
 import os
 import sys
 from pathlib import Path
 import tempfile
 import json
+import uuid
+import logging
+import uvicorn
 
 # Add the PNG adaptation modules to path
 current_dir = Path(__file__).parent
@@ -19,17 +23,51 @@ try:
     from png_change_detection import PNGChangeDetectionEngine
     from png_change_analysis import PNGChangeAnalysisEngine
     from dashboard_maker.dashboard_maker import create_cloud_interference_dashboard, create_dashboard_visualization, display_summary_results
+    
+    # Import advanced deep learning modules
+    from advanced_dl_processor import AdvancedDLProcessor, process_images_with_advanced_ai
+    
+    # Check if advanced modules are available
+    ADVANCED_AI_AVAILABLE = True
 except ImportError as e:
     print(f"Import error: {e}")
     print(f"Current working directory: {os.getcwd()}")
     print(f"Python path: {sys.path}")
-    sys.exit(1)
+    
+    # Try to import only basic modules
+    try:
+        from png_processor import PNGSatelliteProcessor
+        from png_change_detection import PNGChangeDetectionEngine
+        from png_change_analysis import PNGChangeAnalysisEngine
+        from dashboard_maker.dashboard_maker import create_cloud_interference_dashboard, create_dashboard_visualization, display_summary_results
+        ADVANCED_AI_AVAILABLE = False
+        print("⚠️  Advanced AI modules not available. Running in basic mode.")
+    except ImportError as basic_e:
+        print(f"Basic import error: {basic_e}")
+        sys.exit(1)
 
-app = FastAPI(title="BhooDrishti Backend", description="Satellite Image Change Detection API")
+app = FastAPI(
+    title="BhooDrishti Backend", 
+    description="Advanced Satellite Image Change Detection API with AI",
+    version="2.0.0"
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Configure this properly for production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Create output directory
-OUTPUT_DIR = Path("/tmp/bhooDrishti_outputs")
+OUTPUT_DIR = Path("C:/tmp/bhooDrishti_outputs") if os.name == 'nt' else Path("/tmp/bhooDrishti_outputs")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 @app.get("/")
 async def read_root():
@@ -37,7 +75,244 @@ async def read_root():
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "service": "BhooDrishti Backend"}
+    return {
+        "status": "healthy", 
+        "service": "BhooDrishti Backend",
+        "version": "2.0.0",
+        "advanced_ai_available": ADVANCED_AI_AVAILABLE
+    }
+
+@app.post("/predict/advanced")
+async def analyze_image_advanced_ai(
+    image1: UploadFile = File(...), 
+    image2: UploadFile = File(...),
+    config: Optional[str] = Form(None),
+    model_type: Optional[str] = Form("siamese_unet")
+):
+    """
+    Advanced AI-powered satellite image change detection
+    
+    Uses state-of-the-art deep learning models for enhanced accuracy.
+    Includes cloud detection, quality assessment, and detailed analysis.
+    
+    Args:
+        image1: First satellite image (earlier time)
+        image2: Second satellite image (later time)  
+        config: Optional configuration as JSON string
+        model_type: AI model type ('siamese_unet', 'transformer')
+        
+    Returns:
+        Comprehensive analysis results with AI-powered insights
+    """
+    
+    if not ADVANCED_AI_AVAILABLE:
+        raise HTTPException(
+            status_code=503, 
+            detail="Advanced AI features not available. Please install required dependencies."
+        )
+    
+    temp_files = []
+    analysis_id = str(uuid.uuid4())
+    
+    try:
+        logger.info(f"🤖 Starting advanced AI analysis {analysis_id}")
+        
+        # Validate file types
+        for img in [image1, image2]:
+            if not img.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.tif')):
+                raise HTTPException(status_code=400, detail=f"Unsupported file type: {img.filename}")
+        
+        # Create analysis directory
+        analysis_dir = OUTPUT_DIR / analysis_id
+        analysis_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Save uploaded files
+        img1_path = analysis_dir / f"image1_{image1.filename}"
+        img2_path = analysis_dir / f"image2_{image2.filename}"
+        
+        with open(img1_path, "wb") as f:
+            content = await image1.read()
+            f.write(content)
+            temp_files.append(img1_path)
+        
+        with open(img2_path, "wb") as f:
+            content = await image2.read()
+            f.write(content)
+            temp_files.append(img2_path)
+        
+        # Parse configuration
+        ai_config = {}
+        if config:
+            try:
+                ai_config = json.loads(config)
+            except json.JSONDecodeError:
+                logger.warning("Invalid config JSON, using defaults")
+        
+        # Set model configuration
+        ai_config.setdefault('model', {})
+        ai_config['model']['type'] = model_type
+        ai_config['model']['image_size'] = ai_config.get('model', {}).get('image_size', 256)
+        
+        logger.info(f"🔍 Processing with model: {model_type}")
+        
+        # Process with advanced AI
+        result = process_images_with_advanced_ai(
+            str(img1_path), 
+            str(img2_path), 
+            str(analysis_dir),
+            ai_config
+        )
+        
+        if not result['success']:
+            raise HTTPException(status_code=500, detail=f"AI processing failed: {result['error']}")
+        
+        # Prepare response
+        response = {
+            "analysis_id": analysis_id,
+            "status": "completed",
+            "model_info": {
+                "type": model_type,
+                "device": result['processor_info']['device_used'],
+                "version": "2.0.0"
+            },
+            "results": {
+                "statistics": result['change_results']['statistics'],
+                "quality_assessment": result['change_results']['quality_scores'],
+                "change_analysis": {
+                    "vegetation": result['analysis_results']['vegetation_changes'],
+                    "urban": result['analysis_results']['urban_changes'],
+                    "water": result['analysis_results']['water_changes']
+                },
+                "overall_assessment": result['analysis_results']['overall_assessment'],
+                "confidence_scores": result['analysis_results']['confidence_scores']
+            },
+            "visualizations": {
+                "dashboard": f"/download/{analysis_id}/{Path(result['visualizations']['dashboard_path']).name}",
+                "change_map": f"/download/{analysis_id}/{Path(result['visualizations']['change_map_path']).name}",
+                "probability_map": f"/download/{analysis_id}/{Path(result['visualizations']['probability_map_path']).name}"
+            },
+            "downloads": {
+                "report": f"/download/{analysis_id}/advanced_ai_report.json",
+                "dashboard": f"/download/{analysis_id}/{Path(result['visualizations']['dashboard_path']).name}",
+                "all_results": f"/download/{analysis_id}/results.zip"
+            },
+            "recommendations": result['analysis_results'].get('recommendations', [])
+        }
+        
+        logger.info(f"✅ Advanced AI analysis {analysis_id} completed successfully")
+        return response
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Error in advanced AI analysis {analysis_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
+    
+    finally:
+        # Note: Don't clean up temp files immediately, they're needed for downloads
+        pass
+
+@app.get("/models/info")
+async def get_model_info():
+    """
+    Get information about available AI models and capabilities
+    """
+    models_info = {
+        "basic_models": {
+            "png_processor": {
+                "description": "Basic PNG image processor with spectral simulation",
+                "capabilities": ["NDVI calculation", "Cloud detection", "Basic change detection"],
+                "accuracy": "Standard",
+                "speed": "Fast"
+            },
+            "traditional_change_detection": {
+                "description": "Traditional change detection using spectral indices",
+                "capabilities": ["NDVI analysis", "Urban expansion", "Water body changes"],
+                "accuracy": "Good",
+                "speed": "Fast"
+            }
+        }
+    }
+    
+    if ADVANCED_AI_AVAILABLE:
+        models_info["advanced_ai_models"] = {
+            "siamese_unet": {
+                "description": "Advanced Siamese U-Net with attention mechanisms",
+                "capabilities": [
+                    "High-accuracy change detection",
+                    "Cloud and shadow masking",
+                    "Quality assessment",
+                    "Confidence scoring",
+                    "Multi-scale feature extraction"
+                ],
+                "accuracy": "Very High",
+                "speed": "Moderate",
+                "requirements": "GPU recommended"
+            },
+            "advanced_system": {
+                "description": "Complete AI system with multiple specialized networks",
+                "capabilities": [
+                    "State-of-the-art change detection",
+                    "Automated cloud detection",
+                    "Image quality assessment",
+                    "Detailed change type classification",
+                    "Risk assessment and recommendations"
+                ],
+                "accuracy": "Highest",
+                "speed": "Moderate to Slow",
+                "requirements": "GPU strongly recommended"
+            }
+        }
+    
+    # Check GPU availability safely
+    gpu_available = False
+    if ADVANCED_AI_AVAILABLE:
+        try:
+            import torch
+            gpu_available = torch.cuda.is_available()
+        except ImportError:
+            gpu_available = False
+    
+    return {
+        "available_models": models_info,
+        "advanced_ai_available": ADVANCED_AI_AVAILABLE,
+        "system_info": {
+            "gpu_available": gpu_available,
+            "recommended_image_size": 256,
+            "supported_formats": ["PNG", "JPG", "JPEG", "TIFF", "TIF"]
+        }
+    }
+
+@app.get("/system/requirements")
+async def get_system_requirements():
+    """
+    Get system requirements for different models
+    """
+    return {
+        "basic_models": {
+            "ram_required": "2-4 GB",
+            "disk_space": "1 GB",
+            "processing_time": "30-60 seconds",
+            "dependencies": [
+                "opencv-python", "numpy", "matplotlib", "PIL"
+            ]
+        },
+        "advanced_ai_models": {
+            "ram_required": "8-16 GB",
+            "gpu_ram_required": "4-8 GB (recommended)",
+            "disk_space": "5-10 GB",
+            "processing_time": "2-5 minutes",
+            "dependencies": [
+                "torch", "torchvision", "albumentations", 
+                "segmentation-models-pytorch", "transformers"
+            ]
+        },
+        "installation_commands": {
+            "basic": "pip install -r requirements.txt",
+            "advanced": "pip install -r png_adaptation/requirements_advanced.txt",
+            "gpu_support": "pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118"
+        }
+    }
 
 @app.post("/predict")
 async def analyze_image(
@@ -364,17 +639,20 @@ async def delete_analysis(analysis_id: str):
         if not analysis_dir.exists():
             return {"error": f"Analysis not found: {analysis_id}"}
         
-        # Remove all files in the analysis directory
+        # Delete the directory and all its contents
         import shutil
         shutil.rmtree(analysis_dir)
         
         return {
-            "message": f"Analysis {analysis_id} deleted successfully",
-            "analysis_id": analysis_id
+            "status": "success",
+            "message": f"Analysis {analysis_id} deleted successfully"
         }
         
     except Exception as e:
         return {"error": f"Error deleting analysis: {str(e)}"}
+
+
+       
 
 if __name__ == "__main__":
     import uvicorn

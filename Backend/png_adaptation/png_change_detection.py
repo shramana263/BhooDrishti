@@ -298,7 +298,8 @@ class PNGChangeDetectionEngine:
             raise
     
     def comprehensive_change_detection_png(self, image1_path: str, image2_path: str,
-                                         change_types: List[str] = None) -> Dict:
+                                         change_types: List[str] = None, 
+                                         cloud_impact_info: Dict = None) -> Dict:
         """
         Perform comprehensive change detection on PNG images
         
@@ -306,6 +307,7 @@ class PNGChangeDetectionEngine:
             image1_path: Path to first (earlier) PNG image
             image2_path: Path to second (later) PNG image
             change_types: List of change types to detect
+            cloud_impact_info: Cloud impact assessment information
             
         Returns:
             Dict: Comprehensive change detection results
@@ -319,6 +321,16 @@ class PNGChangeDetectionEngine:
             print("🔍 Performing comprehensive change detection on PNG images...")
             print(f"📂 Image 1: {os.path.basename(image1_path)}")
             print(f"📂 Image 2: {os.path.basename(image2_path)}")
+            
+            # Add cloud impact information to results
+            if cloud_impact_info:
+                results['cloud_impact'] = cloud_impact_info
+                
+                # Display cloud warnings if present
+                if not cloud_impact_info['analysis_reliable']:
+                    print("⚠️  WARNING: Cloud interference detected - results may be unreliable")
+                elif cloud_impact_info['impact_assessment'] != 'minimal':
+                    print(f"⚠️  CAUTION: {cloud_impact_info['impact_assessment'].upper()} cloud impact - interpret results carefully")
             
             # Vegetation changes
             if 'vegetation' in change_types:

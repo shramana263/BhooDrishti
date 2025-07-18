@@ -75,6 +75,9 @@ class PNGSatelliteProcessor:
             # Transpose to (bands, height, width) format expected by system
             image_array = np.transpose(image_array, (2, 0, 1))
             
+            # Detect clouds in the image
+            cloud_info = self.detect_clouds_png(image_array)
+            
             # Simulate additional spectral bands
             simulated_bands = self._simulate_spectral_bands(image_array)
             
@@ -99,11 +102,15 @@ class PNGSatelliteProcessor:
             print(f"   📐 Size: {metadata['width']} x {metadata['height']}")
             print(f"   🔢 Bands: {metadata['count']} (3 real + 3 simulated)")
             print(f"   📏 Assumed resolution: 10m")
+            print(f"   ☁️  Cloud coverage: {cloud_info['cloud_coverage_percentage']:.1f}%")
+            if cloud_info['has_significant_clouds']:
+                print(f"   ⚠️  Warning: Significant cloud coverage detected!")
             
             return {
                 'data': full_image,
                 'metadata': metadata,
-                'original_rgb': image_array  # Keep original RGB for visualization
+                'original_rgb': image_array,  # Keep original RGB for visualization
+                'cloud_info': cloud_info  # Add cloud detection results
             }
             
         except Exception as e:
@@ -158,6 +165,253 @@ class PNGSatelliteProcessor:
         swir2_simulated = np.clip(swir2_simulated, 0, 1)
         
         return np.stack([nir_simulated, swir1_simulated, swir2_simulated], axis=0)
+    
+    def detect_clouds_png(self, rgb_bands: np.ndarray) -> Dict:
+        """
+        Detect clouds in PNG satellite image using RGB channels
+        
+        Args:
+            rgb_bands: RGB bands array (3, height, width)
+            
+        Returns:
+            Dict: Cloud detection results including mask and coverage percentage
+        """
+        try:
+            red = rgb_bands[0]
+            green = rgb_bands[1]
+            blue = rgb_bands[2]
+            
+            # Method 1: Basic brightness threshold
+            # Clouds are typically bright in all RGB channels
+            brightness = (red + green + blue) / 3.0
+            bright_mask = brightness > 0.7  # Threshold for bright areas
+            
+            # Method 2: Blue-white detection
+            # Clouds have high blue values and balanced RGB
+            blue_dominance = blue > 0.6
+            rgb_balance = np.abs(red - green) < 0.1  # Similar red and green values
+            white_balance = np.abs(red - blue) < 0.15  # Balanced with blue
+            blue_white_mask = blue_dominance & rgb_balance & white_balance
+            
+            # Method 3: High reflectance detection
+            # Clouds have high reflectance across all bands
+            high_reflectance = (red > 0.6) & (green > 0.6) & (blue > 0.6)
+            
+            # Method 4: Texture-based detection (smooth areas)
+            # Clouds typically have smoother texture than land features
+            from scipy import ndimage
+            # Calculate local standard deviation (texture measure)
+            kernel_size = 5
+            local_std_red = ndimage.generic_filter(red, np.std, size=kernel_size)
+            local_std_green = ndimage.generic_filter(green, np.std, size=kernel_size)
+            local_std_blue = ndimage.generic_filter(blue, np.std, size=kernel_size)
+            
+            # Low texture indicates potential clouds
+            smooth_mask = ((local_std_red < 0.05) & 
+                          (local_std_green < 0.05) & 
+                          (local_std_blue < 0.05) & 
+                          (brightness > 0.5))
+            
+            # Combine detection methods
+            # Cloud mask is where multiple methods agree
+            cloud_confidence = (bright_mask.astype(int) + 
+                              blue_white_mask.astype(int) + 
+                              high_reflectance.astype(int) + 
+                              smooth_mask.astype(int))
+            
+            # Final cloud mask (at least 2 methods agree)
+            cloud_mask = cloud_confidence >= 2
+            
+            # Apply morphological operations to clean up the mask
+            from scipy.ndimage import binary_opening, binary_closing
+            
+            # Remove small noise
+            cloud_mask = binary_opening(cloud_mask, structure=np.ones((3, 3)))
+            # Fill small gaps
+            cloud_mask = binary_closing(cloud_mask, structure=np.ones((5, 5)))
+            
+            # Calculate cloud coverage statistics
+            total_pixels = cloud_mask.size
+            cloud_pixels = np.sum(cloud_mask)
+            cloud_coverage_percentage = (cloud_pixels / total_pixels) * 100
+            
+            # Determine if cloud coverage is significant
+            significant_threshold = 15.0  # 15% threshold
+            has_significant_clouds = cloud_coverage_percentage > significant_threshold
+            
+            # Determine cloud impact level
+            if cloud_coverage_percentage < 5:
+                impact_level = "minimal"
+            elif cloud_coverage_percentage < 15:
+                impact_level = "low"
+            elif cloud_coverage_percentage < 30:
+                impact_level = "moderate"
+            elif cloud_coverage_percentage < 50:
+                impact_level = "high"
+            else:
+                impact_level = "severe"
+            
+            # Create cloud analysis report
+            cloud_info = {
+                'cloud_mask': cloud_mask,
+                'cloud_coverage_percentage': cloud_coverage_percentage,
+                'cloud_pixels': int(cloud_pixels),
+                'total_pixels': int(total_pixels),
+                'has_significant_clouds': has_significant_clouds,
+                'impact_level': impact_level,
+                'detection_confidence': np.mean(cloud_confidence),
+                'analysis_reliable': not has_significant_clouds,
+                'detection_methods': {
+                    'brightness_threshold': np.sum(bright_mask) / total_pixels * 100,
+                    'blue_white_detection': np.sum(blue_white_mask) / total_pixels * 100,
+                    'high_reflectance': np.sum(high_reflectance) / total_pixels * 100,
+                    'texture_based': np.sum(smooth_mask) / total_pixels * 100
+                }
+            }
+            
+            return cloud_info
+            
+        except Exception as e:
+            print(f"⚠️  Warning: Cloud detection failed: {e}")
+            self.logger.warning(f"Cloud detection error: {e}")
+            
+            # Return default (no clouds detected) if detection fails
+            height, width = rgb_bands.shape[1], rgb_bands.shape[2]
+            return {
+                'cloud_mask': np.zeros((height, width), dtype=bool),
+                'cloud_coverage_percentage': 0.0,
+                'cloud_pixels': 0,
+                'total_pixels': height * width,
+                'has_significant_clouds': False,
+                'impact_level': "unknown",
+                'detection_confidence': 0.0,
+                'analysis_reliable': True,
+                'detection_methods': {
+                    'brightness_threshold': 0.0,
+                    'blue_white_detection': 0.0,
+                    'high_reflectance': 0.0,
+                    'texture_based': 0.0
+                }
+            }
+    
+    def assess_cloud_impact_for_analysis(self, img1_cloud_info: Dict, img2_cloud_info: Dict) -> Dict:
+        """
+        Assess the impact of clouds on change detection analysis
+        
+        Args:
+            img1_cloud_info: Cloud information for first image
+            img2_cloud_info: Cloud information for second image
+            
+        Returns:
+            Dict: Assessment of cloud impact on analysis reliability
+        """
+        try:
+            img1_coverage = img1_cloud_info['cloud_coverage_percentage']
+            img2_coverage = img2_cloud_info['cloud_coverage_percentage']
+            
+            # Determine overall analysis reliability
+            analysis_reliable = True
+            warning_messages = []
+            impact_assessment = "minimal"
+            recommendation = "proceed_with_analysis"
+            
+            # Check individual image cloud coverage
+            if img1_coverage > 30 or img2_coverage > 30:
+                analysis_reliable = False
+                warning_messages.append("High cloud coverage in one or both images")
+                impact_assessment = "high"
+                recommendation = "analysis_not_recommended"
+            elif img1_coverage > 15 or img2_coverage > 15:
+                warning_messages.append("Moderate cloud coverage detected")
+                impact_assessment = "moderate"
+                recommendation = "proceed_with_caution"
+            
+            # Check cloud coverage difference between images
+            coverage_difference = abs(img1_coverage - img2_coverage)
+            if coverage_difference > 20:
+                analysis_reliable = False
+                warning_messages.append("Significant difference in cloud coverage between images")
+                impact_assessment = "high"
+                recommendation = "analysis_not_recommended"
+            elif coverage_difference > 10:
+                warning_messages.append("Notable difference in cloud coverage between images")
+                if impact_assessment == "minimal":
+                    impact_assessment = "moderate"
+                if recommendation == "proceed_with_analysis":
+                    recommendation = "proceed_with_caution"
+            
+            # Special case: One clear, one cloudy
+            clear_threshold = 5.0
+            cloudy_threshold = 15.0
+            
+            if ((img1_coverage < clear_threshold and img2_coverage > cloudy_threshold) or
+                (img2_coverage < clear_threshold and img1_coverage > cloudy_threshold)):
+                analysis_reliable = False
+                warning_messages.append("One image is clear while the other has significant clouds")
+                impact_assessment = "severe"
+                recommendation = "analysis_not_recommended"
+            
+            # Generate analysis limitations
+            limitations = []
+            if img1_coverage > 10:
+                limitations.append(f"Image 1 has {img1_coverage:.1f}% cloud coverage affecting visibility")
+            if img2_coverage > 10:
+                limitations.append(f"Image 2 has {img2_coverage:.1f}% cloud coverage affecting visibility")
+            if coverage_difference > 10:
+                limitations.append(f"Cloud coverage difference of {coverage_difference:.1f}% may affect change detection accuracy")
+            
+            # Generate recommendations based on assessment
+            analysis_recommendations = []
+            if not analysis_reliable:
+                analysis_recommendations.extend([
+                    "Change detection analysis not recommended due to cloud interference",
+                    "Consider using images with less cloud coverage",
+                    "If analysis is performed, results should be interpreted with extreme caution"
+                ])
+            elif impact_assessment == "moderate":
+                analysis_recommendations.extend([
+                    "Analysis can proceed but results should be interpreted carefully",
+                    "Cloud-affected areas may show false changes",
+                    "Consider masking cloud-affected regions from analysis"
+                ])
+            else:
+                analysis_recommendations.append("Analysis can proceed with confidence")
+            
+            return {
+                'analysis_reliable': analysis_reliable,
+                'impact_assessment': impact_assessment,
+                'recommendation': recommendation,
+                'warning_messages': warning_messages,
+                'limitations': limitations,
+                'analysis_recommendations': analysis_recommendations,
+                'analysis_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'cloud_statistics': {
+                    'image1_coverage': img1_coverage,
+                    'image2_coverage': img2_coverage,
+                    'coverage_difference': coverage_difference,
+                    'max_coverage': max(img1_coverage, img2_coverage),
+                    'min_coverage': min(img1_coverage, img2_coverage)
+                }
+            }
+            
+        except Exception as e:
+            print(f"⚠️  Warning: Cloud impact assessment failed: {e}")
+            return {
+                'analysis_reliable': False,
+                'impact_assessment': "unknown",
+                'recommendation': "analysis_not_recommended",
+                'warning_messages': ["Cloud assessment failed"],
+                'limitations': ["Unable to assess cloud impact"],
+                'analysis_recommendations': ["Manual review required"],
+                'analysis_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'cloud_statistics': {
+                    'image1_coverage': 0.0,
+                    'image2_coverage': 0.0,
+                    'coverage_difference': 0.0,
+                    'max_coverage': 0.0,
+                    'min_coverage': 0.0
+                }
+            }
     
     def _create_dummy_transform(self, width: int, height: int):
         """Create dummy geospatial transform for the image"""

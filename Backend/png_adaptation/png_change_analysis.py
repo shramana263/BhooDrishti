@@ -346,11 +346,43 @@ class PNGChangeAnalysisEngine:
                 change_detection_results, image_info
             )
             
+            # Add cloud impact assessment if available
+            if 'cloud_impact' in change_detection_results:
+                cloud_impact = change_detection_results['cloud_impact']
+                report['cloud_assessment'] = {
+                    'analysis_reliable': cloud_impact['analysis_reliable'],
+                    'impact_level': cloud_impact['impact_assessment'],
+                    'recommendation': cloud_impact['recommendation'],
+                    'cloud_statistics': cloud_impact['cloud_statistics'],
+                    'warnings': cloud_impact['warning_messages'],
+                    'limitations': cloud_impact['limitations']
+                }
+                
+                # Update confidence assessment based on cloud impact
+                if not cloud_impact['analysis_reliable']:
+                    report['confidence_assessment']['overall_confidence'] = 'low'
+                    report['confidence_assessment']['factors'].extend([
+                        'Analysis reliability compromised by cloud interference',
+                        f"Cloud coverage difference: {cloud_impact['cloud_statistics']['coverage_difference']:.1f}%"
+                    ])
+                elif cloud_impact['impact_assessment'] != 'minimal':
+                    if report['confidence_assessment']['overall_confidence'] == 'high':
+                        report['confidence_assessment']['overall_confidence'] = 'medium'
+                    report['confidence_assessment']['factors'].append(
+                        f"Moderate cloud impact detected ({cloud_impact['impact_assessment']} level)"
+                    )
+                
+                # Add cloud-specific recommendations
+                report['recommendations'].extend(cloud_impact['analysis_recommendations'])
+            
             print("📋 Comprehensive Report Generated:")
             print(f"   🔍 Analysis period: {report['metadata']['analysis_period']}")
             print(f"   📊 Change types analyzed: {len(report['detailed_analysis'])}")
             print(f"   🚨 Alerts triggered: {len(report['alerts'])}")
             print(f"   💡 Recommendations: {len(report['recommendations'])}")
+            if 'cloud_assessment' in report:
+                print(f"   ☁️  Cloud impact: {report['cloud_assessment']['impact_level'].upper()}")
+                print(f"   📈 Analysis reliability: {'✅ HIGH' if report['cloud_assessment']['analysis_reliable'] else '❌ LOW'}")
             
             return report
             
